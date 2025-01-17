@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 
-
 const SectionTitle = ({heading, subHeading}) => {
     return (
         <div className='text-center my-10'>

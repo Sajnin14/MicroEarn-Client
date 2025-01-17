@@ -2,8 +2,9 @@ import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
     const links = <div className="space-x-3 font-semibold">
-        <NavLink to='/auth/login'>Login</NavLink>
-        <NavLink to='/auth/register'>Register</NavLink>
+        <NavLink to='/'>Home</NavLink>
+        <NavLink to='/login'>Login</NavLink>
+        <NavLink to='/register'>Register</NavLink>
         {/* <li><a>Item 3</a></li> */}
     </div>
     return (
