@@ -8,7 +8,7 @@ import img4 from '../../../assets/images/image4.jpg'
 
 const Banner = () => {
     return (
-        <div className="max-h-screen">
+        
             <Carousel className="min-h-screen">
                 <div>
                     <img src={img1} className="h-[400px] w-full object-cover"/>
@@ -27,7 +27,6 @@ const Banner = () => {
                     <p className="legend">Unlock Earnings with Every Click.</p>
                 </div>
             </Carousel>
-        </div>
     );
 };
 

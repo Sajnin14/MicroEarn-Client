@@ -1,0 +1,45 @@
+[
+    {
+      "id": 1,
+      "photo": "https://randomuser.me/api/portraits/men/1.jpg",
+      "name": "John Doe",
+      "quote": "MicroEarn has been a game-changer! I can now earn extra income in my free time. The flexibility it offers is unmatched."
+    },
+    {
+      "id": 2,
+      "photo": "https://randomuser.me/api/portraits/women/2.jpg",
+      "name": "Jane Smith",
+      "quote": "The platform is so easy to use, and the tasks are straightforward and rewarding! I recommend it to anyone looking for extra earnings."
+    },
+    {
+      "id": 3,
+      "photo": "https://randomuser.me/api/portraits/men/3.jpg",
+      "name": "Michael Brown",
+      "quote": "I love how MicroEarn allows me to work on flexible tasks at my convenience. It fits perfectly into my busy schedule."
+    },
+    {
+      "id": 4,
+      "photo": "https://randomuser.me/api/portraits/women/4.jpg",
+      "name": "Emily Johnson",
+      "quote": "The payment process is seamless, and I get rewarded for every little task I do. It’s such a reliable platform for side income."
+    },
+    {
+      "id": 5,
+      "photo": "https://randomuser.me/api/portraits/men/5.jpg",
+      "name": "David Wilson",
+      "quote": "MicroEarn is my go-to platform for earning extra money on the side! I’ve already recommended it to all my friends."
+    },
+    {
+      "id": 6,
+      "photo": "https://randomuser.me/api/portraits/women/6.jpg",
+      "name": "Sophia Martinez",
+      "quote": "The tasks are fun and engaging, and the support team is always there to help! I feel valued and appreciated as a user."
+    },
+    {
+      "id": 7,
+      "photo": "https://randomuser.me/api/portraits/men/7.jpg",
+      "name": "James Anderson",
+      "quote": "Thanks to MicroEarn, I’ve turned my spare time into a productive earning opportunity. It’s the best side hustle platform I’ve found."
+    }
+  ]
+  
