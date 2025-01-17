@@ -9,6 +9,7 @@ const Footer = () => {
                 </p>
                 <p>Copyright ©Sajnin Akhter Saima {new Date().getFullYear()} - All right reserved</p>
             </aside>
+            
             <nav>
                 <div className="grid grid-flow-col text-2xl gap-4">
                     <a href="https://www.linkedin.com/in/sajnin-akhter-saima/" target="blank"> <FaLinkedin></FaLinkedin> </a>
