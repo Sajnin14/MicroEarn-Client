@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const Login = () => {
@@ -60,6 +60,8 @@ const Login = () => {
                         <div className="form-control mt-6">
                             <button className="btn bg-[#007BFF]">Login</button>
                         </div>
+
+                        <p className="text-sm">new in MicroEarn? please <span><Link to='/register' className="text-blue-700">register</Link></span></p>
 
                         {
                             error && <p className="text-red-600 text-xs">{errorMessage}</p>

@@ -1,7 +1,8 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import PropTypes from 'prop-types';
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
 import app from "../firebase/firebase.config";
+import { Navigate } from "react-router-dom";
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
@@ -23,13 +24,37 @@ const AuthProvider = ({ children }) => {
         return signInWithEmailAndPassword(auth, email, password);
     }
 
+    const updateUser = (updateInfo) =>{
+        setLoading(true);
+        return updateProfile(auth.currentUser, updateInfo)
+    }
+
+    const logout = () =>{
+        setLoading(true);
+        <Navigate to='/'></Navigate>
+        return signOut(auth);
+    }
+
+    useEffect(() => {
+        const stateChange = onAuthStateChanged(auth, (currentUser) => {
+            if(currentUser){
+                setLoading(false);
+                setUser(currentUser);
+                
+            }
+
+            return stateChange();
+        })
+    },[])
+
     const authValue = {
        user,
        setUser,
        loading,
        createUser,
        loginUser,
-       
+       updateUser,
+       logout,
     }
 
     return (
