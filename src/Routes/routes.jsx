@@ -5,6 +5,8 @@ import Main from "../MainComponents/Main";
 import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Auth/Login";
 import Register from "../Pages/Auth/Register";
+import MainDashboard from "../MainComponents/MainDashboard";
+import PrivateRoute from "./PrivateRoute";
 
   export const router = createBrowserRouter([
     {
@@ -25,4 +27,11 @@ import Register from "../Pages/Auth/Register";
         }
       ]
     },
+
+    // routes for Dashboard
+
+    {
+      path: '/dashboard',
+      element: <PrivateRoute><MainDashboard></MainDashboard></PrivateRoute>
+    }
   ]);
