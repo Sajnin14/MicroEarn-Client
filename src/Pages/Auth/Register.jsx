@@ -1,5 +1,11 @@
+import { useState } from "react";
+import useAuth from "../../hooks/useAuth";
 
 const Register = () => {
+
+    const [passError, setPassError] = useState(false);
+    const [error, setError] = useState('');
+    const {setUser, createUser} = useAuth();
 
     const handleRegister = e => {
         e.preventDefault();
@@ -9,6 +15,24 @@ const Register = () => {
         const photo = form.photo.value;
         const option = form.option.value;
         const password = form.password.value;
+
+        const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z]).{6,}$/;
+        if(!passwordRegex.test(password)){
+            setPassError(true);
+            return;
+        }
+
+        createUser(email, password)
+        .then(res => {
+            setPassError(false);
+            console.log(res.user);
+            setUser(res.send);
+        })
+        .catch(err => {
+            setPassError(true);
+            setError(err.message);
+            console.log(err.message);
+        })
         
         console.log(name, email, photo, option, password);
     }
@@ -44,13 +68,13 @@ const Register = () => {
                                 <label className="label">
                                     <span className="label-text">Photo</span>
                                 </label>
-                                <input type="file" name="photo" className="file-input file-input-bordered w-full max-w-xs" />
+                                <input type="file" name="photo" className="file-input file-input-bordered w-full max-w-xs" required />
                             </div>
 
-                            <select name="option" className="select select-bordered w-full max-w-xs">
-                                <option disabled selected>Your Role</option>
-                                <option>Worker</option>
-                                <option>Buyer</option>
+                            <select name="option" className="select select-bordered w-full max-w-xs" required>
+                                <option value=''>Your Role</option>
+                                <option value='worker'>Worker</option>
+                                <option value='buyer'>Buyer</option>
                             </select>
 
 
@@ -63,9 +87,15 @@ const Register = () => {
                                 
                             </div>
 
+                            {passError && <p className="text-xs text-red-600">The password must contain at least one uppercase letter, one lowercase letter, and be at least 6 characters long.</p> }
+
                             <div className="form-control mt-6">
                                 <button className="btn bg-[#007BFF]">Register</button>
                             </div>
+
+                            {
+                                passError && <p className="text-xs text-red-600">{error}</p>
+                            }
 
                         </form>
                     </div>
