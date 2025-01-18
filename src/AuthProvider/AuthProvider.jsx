@@ -10,7 +10,7 @@ const auth = getAuth(app);
 
 
 const AuthProvider = ({ children }) => {
-
+   
     const [user, setUser] = useState('');
     const [loading, setLoading] = useState(true);
 
@@ -29,6 +29,7 @@ const AuthProvider = ({ children }) => {
         return updateProfile(auth.currentUser, updateInfo)
     }
 
+    
     const logout = () =>{
         setLoading(true);
         <Navigate to='/'></Navigate>

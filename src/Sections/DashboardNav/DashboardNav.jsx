@@ -1,19 +1,27 @@
 import { FaBell } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useState } from "react";
 
 const DashboardNav = () => {
     const { user } = useAuth();
+    const axiosSecure = useAxiosSecure();
+    const [currentUserInfo, setCurrentUserInfo] = useState();
+    axiosSecure.get(`/users/${user.email}`)
+        .then(res => {
+            setCurrentUserInfo(res.data);
+        })
     return (
         <div className="bg-[#E6F2FF] py-3 sticky z-40 top-0">
             <div className="navbar w-11/12 mx-auto">
                 <div className="flex-1">
                     <Link to='/' className="btn btn-ghost text-2xl text-[#007BFF] inline font-semibold">Micro<span className="text-[#FFC107]">Earn</span></Link>
                 </div>
-                <div className="flex gap-2 items-center">
+                <div className="flex gap-4 items-center">
                     <div>
-                        <p>Available Coin</p>
-                        <p>User Role</p>
+                        <p className="font-semibold">Coin: {currentUserInfo.coin} </p>
+                        <p className="text-lg">{currentUserInfo?.role}</p>
                     </div>
 
                     <div>
