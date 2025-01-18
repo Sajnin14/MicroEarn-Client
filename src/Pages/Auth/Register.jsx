@@ -1,9 +1,14 @@
 import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import { Link, useNavigate } from "react-router-dom";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import { imageUploade } from "../../hooks/imageUploade";
+
+
 
 const Register = () => {
     const { setUser, createUser, updateUser } = useAuth();
+    const axiosPublic = useAxiosPublic();
     const [passError, setPassError] = useState(false);
     const [isError, setIsError] = useState(false);
     const [error, setError] = useState('');
@@ -15,9 +20,11 @@ const Register = () => {
         const form = e.target;
         const name = form.name.value;
         const email = form.email.value;
-        const photo = form.photo.value;
         const option = form.option.value;
         const password = form.password.value;
+        const image = form.photo.files[0];
+
+        console.log(image);
 
 
         const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z]).{6,}$/;
@@ -39,15 +46,32 @@ const Register = () => {
         // setCoin(coinValue);
 
         createUser(email, password)
-            .then(res => {
+            .then(async (res) => {
                 setPassError(false);
                 setIsError(false);
-                console.log(res.user);
                 setUser(res.send);
-                updateUser({ displayName: name, photoURL: photo })
-                    .then(() => { })
+
+                const photoBB = await imageUploade(image)
+                console.log(photoBB);
+
+                updateUser({ displayName: name, photoURL: photoBB })
+                    .then( async() => {
+
+                        const userInfo = {
+                            name: name,
+                            email: email,
+                            photo: photoBB,
+                            role: option,
+                            coin: coinValue,
+                        }
+
+                        const users = await axiosPublic.post('/users', userInfo)
+                        console.log(users.data);
+
+
+                    })
                     .catch(err => {
-                       console.log(err.message)
+                        console.log(err.message)
                     })
                 setTimeout(() => {
                     navigate('/');
@@ -60,7 +84,7 @@ const Register = () => {
                 console.log(err.message);
             })
 
-        console.log(name, email, photo, option, coinValue, password);
+        // console.log(name, email, image, option, coinValue, password);
     }
 
     return (
@@ -94,7 +118,7 @@ const Register = () => {
                             <label className="label">
                                 <span className="label-text">Photo</span>
                             </label>
-                            <input type="file" name="photo" className="file-input file-input-bordered w-full max-w-xs" required />
+                            <input type="file" name="photo" className="file-input file-input-bordered w-full max-w-xs" required accept="image/*" />
                         </div>
 
                         <select name="option" className="select select-bordered w-full max-w-xs" required>

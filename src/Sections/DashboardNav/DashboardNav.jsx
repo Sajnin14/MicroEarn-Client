@@ -4,7 +4,6 @@ import useAuth from "../../hooks/useAuth";
 
 const DashboardNav = () => {
     const { user } = useAuth();
-    
     return (
         <div className="bg-[#E6F2FF] py-3 sticky z-40 top-0">
             <div className="navbar w-11/12 mx-auto">

@@ -8,7 +8,7 @@ const MainDashboard = () => {
         <div>
           <DashboardNav></DashboardNav>  
           <div className="grid grid-cols-4">
-            <div className="col-span-1 bg-[#FFE083]">
+            <div className="col-span-1 bg-yellow-300">
                 <BuyerNavigation></BuyerNavigation>
             </div>
             <div className="col-span-3">
