@@ -74,6 +74,11 @@ const AddTask = () => {
                 icon: "success",
                 timer: 1500,
               });
+
+              axiosSecure.patch(`/users/coin/${currentUserInfo.email}`, {coinUpdate : totalAmmount})
+              .then(res => {
+                console.log(res.data);
+              })
          })
         
         // axiosSecure.post('/tasks', )
