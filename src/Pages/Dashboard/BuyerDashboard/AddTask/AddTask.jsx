@@ -68,7 +68,7 @@ const AddTask = () => {
 
         console.log(tasksInfo);
 
-        
+
          
         
         axiosSecure.post('/tasks', tasksInfo)
@@ -84,7 +84,7 @@ const AddTask = () => {
                 });
 
 
-                axiosSecure.patch(`/users/coin/${userInfo.email}`, { coinUpdate: totalAmmount })
+                axiosSecure.patch(`/users/coin/${userInfo.email}`, { coinUpdate: totalAmmount, status: 'decrease' })
                     .then(res => {
                         if (res.data.modifiedCount > 0) {
                             refetch();
@@ -92,6 +92,8 @@ const AddTask = () => {
                         }
 
                     })
+
+                navigate('/dashboard/myTasks')
             })
 
         // axiosSecure.post('/tasks', )
