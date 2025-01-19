@@ -52,8 +52,9 @@ import UpdateTask from "../Pages/Dashboard/BuyerDashboard/MyTasks/updateTask";
           element: <PrivateRoute><MyTasks></MyTasks> </PrivateRoute>
         },
         {
-          path: 'updateTask',
-          element: <PrivateRoute><UpdateTask></UpdateTask> </PrivateRoute>
+          path: 'updateTask/:id',
+          element: <PrivateRoute><UpdateTask></UpdateTask> </PrivateRoute>,
+          loader: ({params}) => fetch(`http://localhost:5000/tasks/email/${params.id}`)
         }
       ]
     }

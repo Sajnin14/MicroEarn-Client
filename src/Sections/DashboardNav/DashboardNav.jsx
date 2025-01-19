@@ -1,14 +1,13 @@
 import { FaBell } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import useAuth from "../../hooks/useAuth";
 import useUser from "../../hooks/useUser";
 
 const DashboardNav = () => {
-    const {currentUserInfo} = useAuth();
-    console.log(currentUserInfo);
+    // const {currentUserInfo} = useAuth();
+    // console.log(currentUserInfo);
     
     const [userInfo] = useUser();
-    console.log(userInfo);
+    // console.log(userInfo);
     // const axiosSecure = useAxiosSecure();
     // const [currentUserInfo, setCurrentUserInfo] = useState({});
 

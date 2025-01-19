@@ -11,7 +11,7 @@ const MainDashboard = () => {
 
   // const {currentUserInfo} = useAuth();
   const [userInfo] = useUser();
-  console.log(userInfo);
+  // console.log(userInfo);
 
   // const axiosSecure = useAxiosSecure();
   // const [currentUserInfo, setCurrentUserInfo] = useState();

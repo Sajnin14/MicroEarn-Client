@@ -45,7 +45,8 @@ const MyTasks = () => {
                             <td>{task.title}</td>
                             <td>{task.completionDate}</td>
                             <td>{task.submission}</td>
-                            <td> <Link to='/dashboard/updateTask'><FaEdit className="text-lg"></FaEdit></Link></td>
+                            <td> <Link to={`/dashboard/updateTask/${task._id}`}><FaEdit className="text-lg"></FaEdit></Link></td>
+                            
                             <td><button><RiDeleteBin6Fill className="text-red-600 text-lg" /></button> </td>
                         </tr>)
                        }
