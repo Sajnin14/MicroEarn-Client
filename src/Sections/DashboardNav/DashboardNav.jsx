@@ -1,17 +1,21 @@
 import { FaBell } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
-import { useState } from "react";
 
 const DashboardNav = () => {
-    const { user } = useAuth();
-    const axiosSecure = useAxiosSecure();
-    const [currentUserInfo, setCurrentUserInfo] = useState();
-    axiosSecure.get(`/users/${user.email}`)
-        .then(res => {
-            setCurrentUserInfo(res.data);
-        })
+    const {currentUserInfo} = useAuth();
+    console.log(currentUserInfo);
+    // const axiosSecure = useAxiosSecure();
+    // const [currentUserInfo, setCurrentUserInfo] = useState({});
+
+    
+    // useEffect(() => {
+    //     axiosSecure.get(`/users/${user?.email}`)
+    //     .then(res => {
+    //       setCurrentUserInfo(res.data);
+    //     })
+    //   },[axiosSecure, user?.email, currentUserInfo])
+      
     return (
         <div className="bg-[#E6F2FF] py-3 sticky z-40 top-0">
             <div className="navbar w-11/12 mx-auto">
@@ -21,12 +25,12 @@ const DashboardNav = () => {
                 <div className="flex gap-4 items-center">
                     <div>
                         <p className="font-semibold">Coin: {currentUserInfo.coin} </p>
-                        <p className="text-lg">{currentUserInfo?.role}</p>
+                        <p className="text-lg">{currentUserInfo.role}</p>
                     </div>
 
                     <div>
-                        <img src={user.photoURL} className="w-10 h-10 rounded-full border-2 border-[#FFC107]" />
-                        <p>{user.displayName}</p>
+                        <img src={currentUserInfo.photo} className="w-10 h-10 rounded-full border-2 border-[#FFC107]" />
+                        <p>{currentUserInfo.name}</p>
                     </div>
 
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">

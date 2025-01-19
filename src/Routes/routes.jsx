@@ -7,6 +7,8 @@ import Login from "../Pages/Auth/Login";
 import Register from "../Pages/Auth/Register";
 import MainDashboard from "../MainComponents/MainDashboard";
 import PrivateRoute from "./PrivateRoute";
+import AddTask from "../Pages/Dashboard/BuyerDashboard/AddTask/AddTask";
+import PurchaseCoin from "../Pages/Dashboard/PurchaseCoin/PurchaseCoin";
 
   export const router = createBrowserRouter([
     {
@@ -32,6 +34,16 @@ import PrivateRoute from "./PrivateRoute";
 
     {
       path: '/dashboard',
-      element: <PrivateRoute><MainDashboard></MainDashboard></PrivateRoute>
+      element: <PrivateRoute><MainDashboard></MainDashboard></PrivateRoute>,
+      children: [
+        {
+          path: 'addTask',
+          element: <AddTask></AddTask>
+        },
+        {
+          path: 'purchaseCoin',
+          element: <PurchaseCoin></PurchaseCoin>
+        }
+      ]
     }
   ]);
