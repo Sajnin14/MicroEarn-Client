@@ -1,10 +1,14 @@
 import { FaBell } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import useUser from "../../hooks/useUser";
 
 const DashboardNav = () => {
     const {currentUserInfo} = useAuth();
     console.log(currentUserInfo);
+    
+    const [userInfo] = useUser();
+    console.log(userInfo);
     // const axiosSecure = useAxiosSecure();
     // const [currentUserInfo, setCurrentUserInfo] = useState({});
 
@@ -24,13 +28,13 @@ const DashboardNav = () => {
                 </div>
                 <div className="flex gap-4 items-center">
                     <div>
-                        <p className="font-semibold">Coin: {currentUserInfo.coin} </p>
-                        <p className="text-lg">{currentUserInfo.role}</p>
+                        <p className="font-semibold">Coin: {userInfo.coin} </p>
+                        <p className="text-lg">{userInfo.role}</p>
                     </div>
 
                     <div>
-                        <img src={currentUserInfo.photo} className="w-10 h-10 rounded-full border-2 border-[#FFC107]" />
-                        <p>{currentUserInfo.name}</p>
+                        <img src={userInfo.photo} className="w-10 h-10 rounded-full border-2 border-[#FFC107]" />
+                        <p>{userInfo.name}</p>
                     </div>
 
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">

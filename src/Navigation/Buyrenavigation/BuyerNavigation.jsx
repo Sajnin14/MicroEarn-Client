@@ -11,7 +11,7 @@ const BuyerNavigation = () => {
 
             <li><NavLink to='/dashboard/addTask'> <FaTasks></FaTasks> Add New Task</NavLink></li>
 
-            <li><NavLink to='/dashboard/myTask'> <VscTasklist /> My Task</NavLink></li>
+            <li><NavLink to='/dashboard/myTasks'> <VscTasklist /> My Task</NavLink></li>
 
             <li><NavLink to='/dashboard/purchaseCoin'> <FaCoins></FaCoins> Purchase Coin
             </NavLink></li>

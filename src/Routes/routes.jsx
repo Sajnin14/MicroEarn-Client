@@ -8,7 +8,10 @@ import Register from "../Pages/Auth/Register";
 import MainDashboard from "../MainComponents/MainDashboard";
 import PrivateRoute from "./PrivateRoute";
 import AddTask from "../Pages/Dashboard/BuyerDashboard/AddTask/AddTask";
-import PurchaseCoin from "../Pages/Dashboard/PurchaseCoin/PurchaseCoin";
+import PurchaseCoin from "../Pages/Dashboard/BuyerDashboard/PurchaseCoin/PurchaseCoin";
+import MyTasks from "../Pages/Dashboard/BuyerDashboard/MyTasks/MyTasks";
+import UpdateTask from "../Pages/Dashboard/BuyerDashboard/MyTasks/updateTask";
+
 
   export const router = createBrowserRouter([
     {
@@ -38,11 +41,19 @@ import PurchaseCoin from "../Pages/Dashboard/PurchaseCoin/PurchaseCoin";
       children: [
         {
           path: 'addTask',
-          element: <AddTask></AddTask>
+          element: <PrivateRoute><AddTask></AddTask></PrivateRoute>
         },
         {
           path: 'purchaseCoin',
-          element: <PurchaseCoin></PurchaseCoin>
+          element: <PrivateRoute><PurchaseCoin></PurchaseCoin></PrivateRoute>
+        },
+        {
+          path: 'myTasks',
+          element: <PrivateRoute><MyTasks></MyTasks> </PrivateRoute>
+        },
+        {
+          path: 'updateTask',
+          element: <PrivateRoute><UpdateTask></UpdateTask> </PrivateRoute>
         }
       ]
     }

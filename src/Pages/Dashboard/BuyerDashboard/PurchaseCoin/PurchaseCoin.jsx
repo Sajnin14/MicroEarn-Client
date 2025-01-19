@@ -1,4 +1,4 @@
-import SectionTitle from "../../../Sections/SectionTitle/SectionTitle";
+import SectionTitle from "../../../../Sections/SectionTitle/SectionTitle";
 
 const PurchaseCoin = () => {
     return (

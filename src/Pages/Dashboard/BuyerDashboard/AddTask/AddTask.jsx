@@ -1,20 +1,22 @@
 
 import Swal from "sweetalert2";
-import useAuth from "../../../../hooks/useAuth";
 import SectionTitle from "../../../../Sections/SectionTitle/SectionTitle";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import { imageUploade } from "../../../../hooks/imageUploade";
-
+import useUser from "../../../../hooks/useUser";
 
 const AddTask = () => {
-    const { currentUserInfo } = useAuth();
+
+    const [userInfo, refetch] = useUser();
+
+
     const navigate = useNavigate();
     const [error, setError] = useState(false);
     const axiosSecure = useAxiosSecure();
 
-    const handleAddTask = async(e) => {
+    const handleAddTask = async (e) => {
         e.preventDefault();
         const form = e.target;
         const title = form.title.value;
@@ -33,7 +35,7 @@ const AddTask = () => {
 
         setError(false);
 
-        const totalCoin = currentUserInfo.coin;
+        const totalCoin = userInfo.coin;
         const totalAmmount = ammount * neededWorkers;
         console.log(totalAmmount, totalCoin);
         if (totalAmmount > totalCoin) {
@@ -53,34 +55,45 @@ const AddTask = () => {
 
         const tasksInfo = {
             title: title,
-            taskImage : photoBB,
+            taskImage: photoBB,
             payCoin: ammount,
             neededWorkers: neededWorkers,
-            totalSpentCoin : totalAmmount,
+            totalSpentCoin: totalAmmount,
             completionDate: date,
             submission: submission,
             details: details,
-            buyerName: currentUserInfo.name,
-            buyerEmail: currentUserInfo.email,
+            buyerName: userInfo.name,
+            buyerEmail: userInfo.email,
         }
 
         console.log(tasksInfo);
 
-         axiosSecure.post('/tasks', tasksInfo)
-         .then(res => {
-            console.log(res.data);
-            Swal.fire({
-                title: "tasks has been added!",
-                icon: "success",
-                timer: 1500,
-              });
-
-              axiosSecure.patch(`/users/coin/${currentUserInfo.email}`, {coinUpdate : totalAmmount})
-              .then(res => {
-                console.log(res.data);
-              })
-         })
         
+         
+        
+        axiosSecure.post('/tasks', tasksInfo)
+            .then(res => {
+                if (res.data.modifiedCount > 0) {
+                    refetch();
+                    console.log(res.data);
+                }
+                Swal.fire({
+                    title: "tasks has been added!",
+                    icon: "success",
+                    timer: 1500,
+                });
+
+
+                axiosSecure.patch(`/users/coin/${userInfo.email}`, { coinUpdate: totalAmmount })
+                    .then(res => {
+                        if (res.data.modifiedCount > 0) {
+                            refetch();
+                            console.log(res.data);
+                        }
+
+                    })
+            })
+
         // axiosSecure.post('/tasks', )
         // console.log(title, taskImage, ammount, neededWorkers, date, submission, details);
 
