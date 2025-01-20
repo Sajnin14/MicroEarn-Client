@@ -11,6 +11,7 @@ import AddTask from "../Pages/Dashboard/BuyerDashboard/AddTask/AddTask";
 import PurchaseCoin from "../Pages/Dashboard/BuyerDashboard/PurchaseCoin/PurchaseCoin";
 import MyTasks from "../Pages/Dashboard/BuyerDashboard/MyTasks/MyTasks";
 import UpdateTask from "../Pages/Dashboard/BuyerDashboard/MyTasks/updateTask";
+import PaymentHistory from "../Pages/Dashboard/BuyerDashboard/PaymentHistory/PaymentHistory";
 
 
   export const router = createBrowserRouter([
@@ -55,6 +56,10 @@ import UpdateTask from "../Pages/Dashboard/BuyerDashboard/MyTasks/updateTask";
           path: 'updateTask/:id',
           element: <PrivateRoute><UpdateTask></UpdateTask> </PrivateRoute>,
           loader: ({params}) => fetch(`http://localhost:5000/tasks/email/${params.id}`)
+        },
+        {
+          path: 'paymentHistory',
+          element: <PrivateRoute><PaymentHistory></PaymentHistory> </PrivateRoute>
         }
       ]
     }

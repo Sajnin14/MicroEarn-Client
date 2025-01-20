@@ -8,6 +8,8 @@ import useUser from "../../../../../hooks/useUser";
 
 const CheckOutForm = ({ dollar, coin }) => {
     console.log(dollar, coin);
+    // const dollarNum = parseInt(dollar);
+    // const coinNum = parseInt(coin);
     const [error, setError] = useState('');
     const [clientSecret, setClientSecret] = useState('');
     const [transactionId, setTransactionId] = useState('');
@@ -19,13 +21,16 @@ const CheckOutForm = ({ dollar, coin }) => {
 
 
     useEffect(() => {
-        axiosSecure.post('/create-payment-intent', { price: dollar })
+        if(dollar){
+            axiosSecure.post('/create-payment-intent', { price:  dollar })
             .then(res => {
                 console.log(res.data.clientSecret);
                 setClientSecret(res.data.clientSecret);
             })
 
-    }, [axiosSecure, dollar])
+        }
+        
+    }, [axiosSecure,  dollar])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -81,7 +86,22 @@ const CheckOutForm = ({ dollar, coin }) => {
 
                 console.log('payment success = ', paymentIntent.id);
                 setTransactionId(paymentIntent.id);
-                
+
+                const payment = {
+                    buyerName: userInfo.name,
+                    buyerEmail: userInfo.email,
+                    buyerId: userInfo._id,
+                    price:  dollar,
+                    buyCoin: coin,
+                    date: new Date(),  
+                }
+
+                axiosSecure.post('/paymentsHistory', payment)
+                .then(res => {
+                    console.log(res.data);
+                    
+                })
+
                 
             }
         }
