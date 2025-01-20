@@ -14,6 +14,7 @@ import UpdateTask from "../Pages/Dashboard/BuyerDashboard/MyTasks/updateTask";
 import PaymentHistory from "../Pages/Dashboard/BuyerDashboard/PaymentHistory/PaymentHistory";
 import TaskList from "../Pages/Dashboard/WorkerDashboard/TaskList/TaskList";
 import TaskDetails from "../Pages/Dashboard/WorkerDashboard/TaskList/TaskDetails/TaskDetails";
+import WorkerSubmissions from "../Pages/Dashboard/WorkerDashboard/WorkersSubmission/WorkerSubmissions";
 
 
   export const router = createBrowserRouter([
@@ -73,7 +74,12 @@ import TaskDetails from "../Pages/Dashboard/WorkerDashboard/TaskList/TaskDetails
         },
         {
           path: 'taskDetails/:id',
-          element: <TaskDetails></TaskDetails>
+          element: <TaskDetails></TaskDetails>,
+          loader: ({params}) => fetch(`http://localhost:5000/tasks/id/${params.id}`)
+        },
+        {
+          path: 'workerSubmissions',
+          element: <PrivateRoute><WorkerSubmissions></WorkerSubmissions></PrivateRoute>
         }
       ]
     }

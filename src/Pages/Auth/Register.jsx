@@ -74,7 +74,7 @@ const Register = () => {
                         console.log(err.message)
                     })
                 setTimeout(() => {
-                    navigate('/');
+                    navigate('/dashboard');
                 }, 1000);
 
             })

@@ -20,7 +20,7 @@ const Login = () => {
             .then(result => {
                 setUser(result.user);
                 setError(false);
-                navigate('/');
+                navigate('/dashboard');
             })
             .catch(error => {
                 setError(true);
