@@ -12,6 +12,8 @@ import PurchaseCoin from "../Pages/Dashboard/BuyerDashboard/PurchaseCoin/Purchas
 import MyTasks from "../Pages/Dashboard/BuyerDashboard/MyTasks/MyTasks";
 import UpdateTask from "../Pages/Dashboard/BuyerDashboard/MyTasks/updateTask";
 import PaymentHistory from "../Pages/Dashboard/BuyerDashboard/PaymentHistory/PaymentHistory";
+import TaskList from "../Pages/Dashboard/WorkerDashboard/TaskList/TaskList";
+import TaskDetails from "../Pages/Dashboard/WorkerDashboard/TaskList/TaskDetails/TaskDetails";
 
 
   export const router = createBrowserRouter([
@@ -40,6 +42,8 @@ import PaymentHistory from "../Pages/Dashboard/BuyerDashboard/PaymentHistory/Pay
       path: '/dashboard',
       element: <PrivateRoute><MainDashboard></MainDashboard></PrivateRoute>,
       children: [
+
+        // buyer routes
         {
           path: 'addTask',
           element: <PrivateRoute><AddTask></AddTask></PrivateRoute>
@@ -60,6 +64,16 @@ import PaymentHistory from "../Pages/Dashboard/BuyerDashboard/PaymentHistory/Pay
         {
           path: 'paymentHistory',
           element: <PrivateRoute><PaymentHistory></PaymentHistory> </PrivateRoute>
+        },
+
+        // worker routes
+        {
+          path: 'taskList',
+          element: <TaskList></TaskList>
+        },
+        {
+          path: 'taskDetails/:id',
+          element: <TaskDetails></TaskDetails>
         }
       ]
     }
