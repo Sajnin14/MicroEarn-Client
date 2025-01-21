@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 const AdminNavigation = () => {
     return (
         <ul className="menu text-xl font-semibold p-3">
-        <li><NavLink to='/dashboard/workerHome'> <FaHome></FaHome>Admin Home</NavLink></li>
+        <li><NavLink to='/dashboard/adminHome'> <FaHome></FaHome>Admin Home</NavLink></li>
 
         <li><NavLink to='/dashboard/manageTasks'> <FaList></FaList>Manage Tasks</NavLink></li>
 

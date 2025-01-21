@@ -17,6 +17,8 @@ import TaskDetails from "../Pages/Dashboard/WorkerDashboard/TaskList/TaskDetails
 import WorkerSubmissions from "../Pages/Dashboard/WorkerDashboard/WorkersSubmission/WorkerSubmissions";
 import Withdrawals from "../Pages/Dashboard/WorkerDashboard/Withdrawals/Withdrawals";
 import BuyerHome from "../Pages/Dashboard/BuyerDashboard/BuyerHome/BuyerHome";
+import WorkerHome from "../Pages/Dashboard/WorkerDashboard/WorkerHome/WorkerHome";
+import AdminHome from "../Pages/Dashboard/AdminDashboard/AdminHome/AdminHome";
 
 
   export const router = createBrowserRouter([
@@ -47,6 +49,11 @@ import BuyerHome from "../Pages/Dashboard/BuyerDashboard/BuyerHome/BuyerHome";
       children: [
 
         // buyer routes
+
+        {
+          path: 'buyerHome',
+          element: <PrivateRoute><BuyerHome></BuyerHome></PrivateRoute>
+        },
         {
           path: 'addTask',
           element: <PrivateRoute><AddTask></AddTask></PrivateRoute>
@@ -89,8 +96,15 @@ import BuyerHome from "../Pages/Dashboard/BuyerDashboard/BuyerHome/BuyerHome";
         },
 
         {
-          path: 'buyerHome',
-          element: <PrivateRoute><BuyerHome></BuyerHome></PrivateRoute>
+          path: 'workerHome',
+          element: <PrivateRoute><WorkerHome></WorkerHome></PrivateRoute>
+        },
+
+        // admin routes
+
+        {
+          path: 'adminHome',
+          element: <PrivateRoute><AdminHome></AdminHome></PrivateRoute>
         }
       ]
     }

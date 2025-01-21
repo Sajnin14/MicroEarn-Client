@@ -2,10 +2,12 @@
 import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import { Link, useNavigate } from "react-router-dom";
+import { FcGoogle } from "react-icons/fc";
+import Swal from "sweetalert2";
 
 
 const Login = () => {
-    const { setUser, loginUser } = useAuth();
+    const { setUser, loginUser, googleSignIn } = useAuth();
     const [error, setError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
@@ -20,7 +22,7 @@ const Login = () => {
             .then(result => {
                 setUser(result.user);
                 setError(false);
-                navigate('/dashboard/buyerHome');
+                navigate('/dashboard');
             })
             .catch(error => {
                 setError(true);
@@ -28,14 +30,22 @@ const Login = () => {
             })
 
     }
+
+    const handleGoogle = () => {
+        googleSignIn()
+            .then(res => {
+                setUser(res.user);
+                Swal.fire('successfully register with google' );
+                navigate('/');
+            })
+    }
     return (
         <div className="hero bg-base-200 min-h-screen">
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <div className="text-center lg:text-left">
-                    <h1 className="text-5xl font-bold">Regiter Now</h1>
+                    <h1 className="text-5xl font-bold">Login Now</h1>
                     <p className="py-6">
-                        Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-                        quasi. In deleniti eaque aut repudiandae et a id nisi.
+                        Login and earn money with fun
                     </p>
                 </div>
                 <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
@@ -66,6 +76,8 @@ const Login = () => {
                         {
                             error && <p className="text-red-600 text-xs">{errorMessage}</p>
                         }
+
+                        <button onClick={handleGoogle} className="btn bg-base-300 mt-12 mx-5"><FcGoogle className="text-xl"></FcGoogle> Sign-in With Google</button>
 
                     </form>
                 </div>

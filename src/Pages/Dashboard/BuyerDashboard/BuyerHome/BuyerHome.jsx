@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import useUser from "../../../../hooks/useUser";
 import SectionTitle from "../../../../Sections/SectionTitle/SectionTitle";
-import Swal from "sweetalert2";
+
 
 
 const BuyerHome = () => {
