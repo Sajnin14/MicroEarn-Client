@@ -15,6 +15,7 @@ import PaymentHistory from "../Pages/Dashboard/BuyerDashboard/PaymentHistory/Pay
 import TaskList from "../Pages/Dashboard/WorkerDashboard/TaskList/TaskList";
 import TaskDetails from "../Pages/Dashboard/WorkerDashboard/TaskList/TaskDetails/TaskDetails";
 import WorkerSubmissions from "../Pages/Dashboard/WorkerDashboard/WorkersSubmission/WorkerSubmissions";
+import Withdrawals from "../Pages/Dashboard/WorkerDashboard/Withdrawals/Withdrawals";
 
 
   export const router = createBrowserRouter([
@@ -80,6 +81,10 @@ import WorkerSubmissions from "../Pages/Dashboard/WorkerDashboard/WorkersSubmiss
         {
           path: 'workerSubmissions',
           element: <PrivateRoute><WorkerSubmissions></WorkerSubmissions></PrivateRoute>
+        },
+        {
+          path: 'withdrawals',
+          element: <PrivateRoute><Withdrawals></Withdrawals></PrivateRoute>
         }
       ]
     }
