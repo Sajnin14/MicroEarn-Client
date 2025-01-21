@@ -15,11 +15,13 @@ const TaskDetails = () => {
         e.preventDefault();
         const submit = e.target.submit.value;
         console.log(submit);
-
+        
         const submitInfo = {
             task_id : loader._id,
             task_title : loader.title,
             payable_amount: loader.payCoin,
+            neededWorkers : loader.neededWorkers,
+            totalSpentCoin : loader.totalSpentCoin,
             worker_email: userInfo.email,
             worker_name: userInfo.name,
             Buyer_name: loader.buyerName,

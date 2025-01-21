@@ -74,7 +74,9 @@ const MyTasks = () => {
                             <th></th>
                             <th>Task Title</th>
                             <th>Completion Date</th>
-                            <th>Submission Details</th>
+                            <th>Needed Workers</th>
+                            <th>Total Pay</th>
+                            <th>Submission</th>
                             <th>Update</th>
                             <th>Delete</th>
                         </tr>
@@ -85,6 +87,8 @@ const MyTasks = () => {
                             <th>{idx + 1}</th>
                             <td>{task.title}</td>
                             <td>{task.completionDate}</td>
+                            <td>{task.neededWorkers}</td>
+                            <td>{task.totalSpentCoin}</td>
                             <td>{task.submission}</td>
                             <td> <Link to={`/dashboard/updateTask/${task._id}`}><FaEdit className="text-lg"></FaEdit></Link></td>
 

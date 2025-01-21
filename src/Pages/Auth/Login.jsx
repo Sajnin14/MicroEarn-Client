@@ -20,7 +20,7 @@ const Login = () => {
             .then(result => {
                 setUser(result.user);
                 setError(false);
-                navigate('/dashboard');
+                navigate('/dashboard/buyerHome');
             })
             .catch(error => {
                 setError(true);
