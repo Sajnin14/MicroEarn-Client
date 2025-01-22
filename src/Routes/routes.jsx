@@ -21,6 +21,7 @@ import WorkerHome from "../Pages/Dashboard/WorkerDashboard/WorkerHome/WorkerHome
 import AdminHome from "../Pages/Dashboard/AdminDashboard/AdminHome/AdminHome";
 import Dashboard from "../Pages/Dashboard/Dashboard/Dashboard";
 import ManageUsers from "../Pages/Dashboard/AdminDashboard/ManageUser/ManageUsers";
+import ManageTask from "../Pages/Dashboard/AdminDashboard/ManageTasks/ManageTask";
 
 
   export const router = createBrowserRouter([
@@ -116,6 +117,10 @@ import ManageUsers from "../Pages/Dashboard/AdminDashboard/ManageUser/ManageUser
         {
           path: 'manageUsers',
           element: <PrivateRoute><ManageUsers></ManageUsers></PrivateRoute>
+        },
+        {
+          path: 'manageTasks',
+          element: <PrivateRoute><ManageTask></ManageTask></PrivateRoute>
         }
       ]
     }
