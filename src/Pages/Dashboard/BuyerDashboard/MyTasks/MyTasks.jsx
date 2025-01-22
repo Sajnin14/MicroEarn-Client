@@ -20,7 +20,7 @@ const MyTasks = () => {
         },
     })
     
-    const topTasks = tasks.sort((a,b) => b.date - a.date);
+    const topTasks = tasks.sort((a,b) => b.datcompletionDate - a.completionDate);
 
     const handleDelete = (task) => {
        const totalCoin = task.totalSpentCoin;

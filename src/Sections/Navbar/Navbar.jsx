@@ -58,7 +58,7 @@ const Navbar = () => {
                     <ul className="menu menu-horizontal px-1">
                         {links}
                         {
-                            user.email ? <button className="font-semibold ml-2" onClick={() => logout()}>logout</button> 
+                            user?.email ? <button className="font-semibold ml-2" onClick={() => logout()}>logout</button> 
                            : <div className="space-x-2 font-semibold">
                                 <NavLink to='/login'>Login</NavLink>
                                 <NavLink to='/register'>Register</NavLink>

@@ -19,6 +19,8 @@ import Withdrawals from "../Pages/Dashboard/WorkerDashboard/Withdrawals/Withdraw
 import BuyerHome from "../Pages/Dashboard/BuyerDashboard/BuyerHome/BuyerHome";
 import WorkerHome from "../Pages/Dashboard/WorkerDashboard/WorkerHome/WorkerHome";
 import AdminHome from "../Pages/Dashboard/AdminDashboard/AdminHome/AdminHome";
+import Dashboard from "../Pages/Dashboard/Dashboard/Dashboard";
+import ManageUsers from "../Pages/Dashboard/AdminDashboard/ManageUser/ManageUsers";
 
 
   export const router = createBrowserRouter([
@@ -47,6 +49,11 @@ import AdminHome from "../Pages/Dashboard/AdminDashboard/AdminHome/AdminHome";
       path: '/dashboard',
       element: <PrivateRoute><MainDashboard></MainDashboard></PrivateRoute>,
       children: [
+
+        {
+          path: '/dashboard',
+          element: <Dashboard></Dashboard>
+        },
 
         // buyer routes
 
@@ -105,6 +112,10 @@ import AdminHome from "../Pages/Dashboard/AdminDashboard/AdminHome/AdminHome";
         {
           path: 'adminHome',
           element: <PrivateRoute><AdminHome></AdminHome></PrivateRoute>
+        },
+        {
+          path: 'manageUsers',
+          element: <PrivateRoute><ManageUsers></ManageUsers></PrivateRoute>
         }
       ]
     }
