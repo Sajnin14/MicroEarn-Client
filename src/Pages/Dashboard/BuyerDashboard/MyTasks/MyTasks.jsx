@@ -73,7 +73,8 @@ const MyTasks = () => {
                         <tr>
                             <th></th>
                             <th>Task Title</th>
-                            <th>Completion Date</th>
+                            <th>Deadline</th>
+                            <th>Coin</th>
                             <th>Needed Workers</th>
                             <th>Total Pay</th>
                             <th>Submission</th>
@@ -87,6 +88,7 @@ const MyTasks = () => {
                             <th>{idx + 1}</th>
                             <td>{task.title}</td>
                             <td>{task.completionDate}</td>
+                            <td>{task.payCoin}</td>
                             <td>{task.neededWorkers}</td>
                             <td>{task.totalSpentCoin}</td>
                             <td>{task.submission}</td>

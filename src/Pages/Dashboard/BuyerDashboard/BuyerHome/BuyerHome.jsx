@@ -2,14 +2,15 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import useUser from "../../../../hooks/useUser";
 import SectionTitle from "../../../../Sections/SectionTitle/SectionTitle";
+import Swal from "sweetalert2";
 
 
 
 const BuyerHome = () => {
-    const [userInfo, refetch] = useUser();
+    const [userInfo] = useUser();
     const axiosSecure = useAxiosSecure();
-
-    const { data: tasks = [] } = useQuery({
+    
+    const { data: tasks = [], refetch } = useQuery({
         queryKey: ['tasks', userInfo?.email],
         queryFn: async () => {
             const task = await axiosSecure.get(`/tasks/${userInfo.email}`);
@@ -29,28 +30,44 @@ const BuyerHome = () => {
     const totalPayment = tasks.reduce((total, item) => total + item.totalSpentCoin, 0)
     console.log(totalPayment);
 
-    const handleStatus = async (e, id, payable_amount, email, neededWorkers, task_id) => {
+
+
+    const handleStatus = async (e, id, payable_amount, email, workersCount, task_id) => {
         e.preventDefault();
         const value = e.target.value;
         const data = {
             status: value
         }
-        console.log(payable_amount, neededWorkers, email);
-        const needed = neededWorkers + 1;
-        const total = needed * payable_amount;
-        const updateInfo = {
-            neededWorkers: needed,
-            totalSpentCoin: total
-        }
 
+        const updatedNeeded = data.status === "approved" ? workersCount - 1 : workersCount + 1;
+        const total = updatedNeeded * payable_amount;
+        
+       
+        const updateInfo = {
+            neededWorkers: updatedNeeded,
+            totalSpentCoin: total,
+        };
+
+        
         console.log(updateInfo);
 
         if (userInfo?.email) {
             axiosSecure.patch(`/submitTask/${id}`, data)
                 .then(async (res) => {
-                   
+
+                    if (res.data.modifiedCount) {
+                        refetch();
+                        const res = await axiosSecure.patch(`/tasks/email/${task_id}`, updateInfo)
+                        if (res.data.modifiedCount) {
+                            refetch();
+                            Swal.fire('status updated!')
+                        }
+
+                    }
+
                     if (res.data.modifiedCount && data.status === 'approved') {
 
+                        // user's coin increases
                         axiosSecure.patch(`/users/coin/${email}`, { coinUpdate: payable_amount, status: 'increase' })
                             .then(res => {
                                 if (res.data.modifiedCount) {
@@ -58,23 +75,14 @@ const BuyerHome = () => {
                                     console.log(res.data);
                                 }
                             })
+
                     }
 
-
-                    if (res.data.modifiedCount && data.status === 'rejected') {
-                        console.log('rejected')
-                        const res = await axiosSecure.patch(`/tasks/email/${task_id}`, updateInfo)
-                        if (res.data.modifiedCount) {
-                            refetch();
-                        }
-    
-                    }
-
-
+                
                 })
 
 
-               
+
         }
 
     }

@@ -7,7 +7,7 @@ const PaymentHistory = () => {
 
     const [userInfo] = useUser();
     const axiosSecure = useAxiosSecure();
-    const [history, setHistory] = useState();
+    const [history, setHistory] = useState([]);
 
     useEffect(() => {
         axiosSecure.get(`/paymentsHistory/${userInfo.email}`)
