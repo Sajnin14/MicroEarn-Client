@@ -1,24 +1,23 @@
 import { FaBell } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import useUser from "../../hooks/useUser";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useEffect, useState } from "react";
 
 const DashboardNav = () => {
-    // const {currentUserInfo} = useAuth();
-    // console.log(currentUserInfo);
-    
+    const [notifications, setNotifications] = useState([]);
     const [userInfo] = useUser();
-    // console.log(userInfo);
-    // const axiosSecure = useAxiosSecure();
-    // const [currentUserInfo, setCurrentUserInfo] = useState({});
+    const axiosSecure = useAxiosSecure();
 
-    
-    // useEffect(() => {
-    //     axiosSecure.get(`/users/${user?.email}`)
-    //     .then(res => {
-    //       setCurrentUserInfo(res.data);
-    //     })
-    //   },[axiosSecure, user?.email, currentUserInfo])
-      
+
+    useEffect(() => {
+        axiosSecure.get(`/notifications/${userInfo.email}`)
+            .then(res => {
+                console.log(res.data);
+                setNotifications(res.data);
+            })
+    }, [axiosSecure, userInfo?.email])
+
     return (
         <div className="bg-[#E6F2FF] py-3 sticky z-40 top-0">
             <div className="navbar w-11/12 mx-auto">
@@ -38,13 +37,28 @@ const DashboardNav = () => {
 
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
                         <div className="indicator">
-                            <FaBell className="text-3xl"></FaBell>
-                            <p className="absolute w-2 h-2 bg-[#FFC107] rounded-full top-0 right-1"></p>
+                            <button onClick={() => document.getElementById('openNotification').showModal()}> <FaBell className="text-4xl"></FaBell>
+                                <p className="absolute w-4 h-4  rounded-full top-0 right-1 bg-yellow-500 font-bold">{notifications.length}</p></button>
                             {/* <span className="badge badge-sm indicator-item rounded-full"></span> */}
                         </div>
                     </div>
                 </div>
             </div>
+
+            {/* Open the modal using document.getElementById('ID').showModal() method */}
+            
+            <dialog id="openNotification" className="modal">
+                <div className="modal-box">
+                    {
+                        notifications.map(notify => <div className="bg-base-100 border border-[#007BFF] p-5 rounded-lg m-4" key={notify._id}>
+                            <p>{notify.message}</p>
+                        </div>)
+                    }
+                </div>
+                <form method="dialog" className="modal-backdrop">
+                    <button>close</button>
+                </form>
+            </dialog>
         </div>
     );
 };

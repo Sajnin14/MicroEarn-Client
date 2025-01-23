@@ -61,7 +61,7 @@ const BuyerHome = () => {
 
 
 
-        const message = data.status === 'approved' ? `you have earned ${payable_amount} from ${userInfo.name} for completing ${title}` : `${userInfo.name} rejects your task ${title}`
+        const message = data.status === 'approved' ? `you have earned ${payable_amount} from ${userInfo.name} for completing $"{title}"` : `${userInfo.name} rejects your task ${title}`
 
         const notificationInfo = {
             status: data.status,

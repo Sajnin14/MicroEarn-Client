@@ -34,7 +34,7 @@ const TaskDetails = () => {
             status: 'submited',
             to: loader.buyerEmail,
             from: userInfo.email,
-            message: `${userInfo.name} submitted task ${loader.title} on ${new Date()}`,
+            message: `${userInfo.name} submitted task --${loader.title}-- on ${new Date()}`,
             route: location.pathname,
             time: new Date(),
         }
