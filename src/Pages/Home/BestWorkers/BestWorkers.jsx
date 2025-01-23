@@ -34,9 +34,7 @@ const BestWorkers = () => {
                         <div className="card-body items-center text-center">
                           <h2 className="card-title">{top.name}</h2>
                           <p className="font-semibold">Total Coin: {top.coin}</p>
-                          <div className="card-actions">
-                            <button className="btn btn-primary">Buy Now</button>
-                          </div>
+                          
                         </div>
                       </div>
                     )

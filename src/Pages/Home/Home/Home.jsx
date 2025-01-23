@@ -3,6 +3,7 @@ import AboutUs from "../AboutUs/AboutUs";
 import Banner from "../Banner/Banner";
 import BestTasks from "../BestTasks/BestTasks";
 import BestWorkers from "../BestWorkers/BestWorkers";
+import ContactUs from "../ContactUs/ContactUs";
 import Testimonial from "../Testimonial/Testimonial";
 
 const Home = () => {
@@ -13,6 +14,7 @@ const Home = () => {
            <Testimonial></Testimonial>
            <BestTasks></BestTasks>
            <AboutUs></AboutUs>
+           <ContactUs></ContactUs>
         </div> 
     );
 };
