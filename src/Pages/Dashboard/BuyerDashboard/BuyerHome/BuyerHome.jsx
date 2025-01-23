@@ -3,13 +3,18 @@ import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import useUser from "../../../../hooks/useUser";
 import SectionTitle from "../../../../Sections/SectionTitle/SectionTitle";
 import Swal from "sweetalert2";
+import { useLocation } from "react-router-dom";
+
 
 
 
 const BuyerHome = () => {
+
     const [userInfo] = useUser();
     const axiosSecure = useAxiosSecure();
-    
+    const location = useLocation();
+    console.log(location.pathname);
+
     const { data: tasks = [], refetch } = useQuery({
         queryKey: ['tasks', userInfo?.email],
         queryFn: async () => {
@@ -32,36 +37,58 @@ const BuyerHome = () => {
 
 
 
-    const handleStatus = async (e, id, payable_amount, email, workersCount, task_id) => {
+    const handleStatus = async (e, id, payable_amount, email, workersCount, task_id, title) => {
         e.preventDefault();
         const value = e.target.value;
         const data = {
             status: value
         }
 
+        if (!workersCount) {
+            return;
+        }
+
+
         const updatedNeeded = data.status === "approved" ? workersCount - 1 : workersCount + 1;
         const total = updatedNeeded * payable_amount;
-        
-       
         const updateInfo = {
             neededWorkers: updatedNeeded,
             totalSpentCoin: total,
         };
 
-        
+
         console.log(updateInfo);
+
+
+
+        const message = data.status === 'approved' ? `you have earned ${payable_amount} from ${userInfo.name} for completing ${title}` : `${userInfo.name} rejects your task ${title}`
+
+        const notificationInfo = {
+            status: data.status,
+            to: email,
+            from: userInfo.email,
+            message: message,
+            route: location.pathname,
+            time: new Date(),
+        }
+
 
         if (userInfo?.email) {
             axiosSecure.patch(`/submitTask/${id}`, data)
                 .then(async (res) => {
 
                     if (res.data.modifiedCount) {
+
                         refetch();
                         const res = await axiosSecure.patch(`/tasks/email/${task_id}`, updateInfo)
                         if (res.data.modifiedCount) {
                             refetch();
                             Swal.fire('status updated!')
                         }
+
+
+                        const notify = await axiosSecure.post('/notifications', notificationInfo)
+                        console.log(notify.data);
 
                     }
 
@@ -78,7 +105,7 @@ const BuyerHome = () => {
 
                     }
 
-                
+
                 })
 
 
@@ -121,8 +148,7 @@ const BuyerHome = () => {
                                     }</td>
                                     <td><button className="btn">see details</button></td>
                                     <td>
-                                        <select onChange={(e) => handleStatus(e, submit._id, submit.payable_amount, submit.worker_email, submit.neededWorkers, submit.task_id, submit.totalSpentCoin
-                                        )} className="select select-bordered select-xs w-full max-w-xs">
+                                        <select onChange={(e) => handleStatus(e, submit._id, submit.payable_amount, submit.worker_email, submit.neededWorkers, submit.task_id, submit.task_title)} className="select select-bordered select-xs w-full max-w-xs">
                                             <option defaultValue={submit.status || 'pending'}>{submit.status}</option>
                                             <option value='approved'>approved</option>
                                             <option value='rejected'>rejected</option>

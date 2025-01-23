@@ -30,6 +30,19 @@ const TaskDetails = () => {
             status: 'Pending'
         }
 
+        const notificationInfo = {
+            status: 'submited',
+            to: loader.buyerEmail,
+            from: userInfo.email,
+            message: `${userInfo.name} submitted task ${loader.title} on ${new Date()}`,
+            route: location.pathname,
+            time: new Date(),
+        }
+
+        console.log(notificationInfo);
+
+
+
         const res = await axiosSecure.post('/submitTask', submitInfo)
         console.log(res.data);
         if(res.data.insertedCount){
@@ -38,6 +51,11 @@ const TaskDetails = () => {
                 icon: "success",
                 timer: 1500
               });
+
+            axiosSecure.post('/notifications', notificationInfo)
+            .then(res => {
+                console.log(res.data)
+            })
 
             navigate('/dashboard/workerSubmissions')
         }

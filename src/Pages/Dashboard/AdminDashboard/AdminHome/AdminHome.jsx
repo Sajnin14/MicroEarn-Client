@@ -26,17 +26,30 @@ const AdminHome = () => {
         },
     })
 
-    const handleStatus = (e, withdrawId, worker_email, withdrawal_coin)=> {
+    const handleStatus = (e, withdrawId, worker_email, withdrawal_coin, update)=> {
         e.preventDefault();
-        const update = e.target.value;
+        // const update = e.target.value;
         const value = {
             status : update
         }
 
         console.log(value);
-        
+
         const withdrawCoin = parseInt(withdrawal_coin)
         console.log(withdrawCoin);
+
+        const notificationInfo = {
+            status: value.status,
+            to: worker_email,
+            from: userInfo.email,
+            message: `Your withdraw request for ${withdrawCoin} is ${value.status} by ${userInfo.name}`,
+            route: location.pathname,
+            time: new Date(),
+        }
+
+        console.log(notificationInfo);
+
+
         Swal.fire({
             title: "Are you sure?",
             text: "user will get money",
@@ -55,6 +68,12 @@ const AdminHome = () => {
                             title: "Withdraw done!",
                             icon: "success"
                           });
+                        
+                        axiosSecure.post('/notifications', notificationInfo)
+                        .then(res => {
+                            console.log(res.data);
+                        })
+
                         if(value.status === 'approved'){
                             axiosSecure.patch(`/users/coin/${worker_email}`, {coinUpdate : withdrawCoin , status : 'decrease'})
                             .then(res => {
@@ -103,6 +122,7 @@ const AdminHome = () => {
                                 <th>payment system</th>
                                 <th>withdraw date</th>
                                 <th>status</th>
+                                <th>action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -115,11 +135,16 @@ const AdminHome = () => {
                                     <td>{withdraw.withdrawal_amount}</td>
                                     <td>{withdraw.payment_system}</td>
                                     <td>{withdraw.withdraw_date}</td>
+                                    <td>{withdraw.status}</td>
                                     <td>
-                                        <select onChange={(e) => handleStatus(e, withdraw._id, withdraw.worker_email, withdraw.withdrawal_coin)} className="select select-bordered select-xs w-full max-w-xs">
+                                        <button disabled={withdraw.status === 'approved'} className="btn" onClick={(e) => handleStatus(e, withdraw._id, withdraw.worker_email, withdraw.withdrawal_coin, 'approved')}>
+                                            {/* <input type="text" className="border border-yellow-600 py-1 mx-3 rounded-lg" readOnly value='approved' /> */}
+                                            payment-success
+                                        </button>
+                                        {/* <select onChange={(e) => handleStatus(e, withdraw._id, withdraw.worker_email, withdraw.withdrawal_coin)} className="select select-bordered select-xs w-full max-w-xs">
                                             <option defaultValue={withdraw.status || 'pending'}>{withdraw.status}</option>
                                             <option value='approved'>approved</option>
-                                        </select>
+                                        </select> */}
                                     </td>
                                 </tr>)
                             }

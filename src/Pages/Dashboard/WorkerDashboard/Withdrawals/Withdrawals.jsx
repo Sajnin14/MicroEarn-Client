@@ -34,6 +34,7 @@ const Withdrawals = () => {
         }
 
         console.log(withDrawalInfo);
+        
         axiosSecure.post('/withdrawals', withDrawalInfo)
         .then(res => {
             console.log(res.data)
