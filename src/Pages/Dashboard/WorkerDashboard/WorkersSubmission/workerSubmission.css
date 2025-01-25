@@ -1,0 +1,15 @@
+.pagination{
+    text-align: center;
+    margin: 8px;
+}
+
+.pagination button{
+    margin-right: 8px;
+    border: 2px solid black;
+    padding: 2px 8px;
+}
+
+.selected{
+    background-color: #FFC107;
+    border: none;
+}
