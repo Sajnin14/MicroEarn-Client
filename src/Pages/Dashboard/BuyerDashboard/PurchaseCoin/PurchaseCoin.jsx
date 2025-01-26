@@ -32,7 +32,7 @@ const PurchaseCoin = () => {
         <div>
             <SectionTitle heading='Purchase Coin' subHeading='Purchase coin to add new tasks'></SectionTitle>
 
-            <div className="grid grid-cols-2 gap-7 p-14">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-7 p-14">
                 {
                     buyCoin.map(coin => <div key={coin.id} className="card bg-[#F8FBFF] image-full shadow-xl">
                         <figure>

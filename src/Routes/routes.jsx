@@ -77,7 +77,7 @@ import ManageTask from "../Pages/Dashboard/AdminDashboard/ManageTasks/ManageTask
         {
           path: 'updateTask/:id',
           element: <PrivateRoute><UpdateTask></UpdateTask> </PrivateRoute>,
-          loader: ({params}) => fetch(`http://localhost:5000/tasks/email/${params.id}`)
+          loader: ({params}) => fetch(`https://pico-server.vercel.app/tasks/email/${params.id}`)
         },
         {
           path: 'paymentHistory',
@@ -92,8 +92,8 @@ import ManageTask from "../Pages/Dashboard/AdminDashboard/ManageTasks/ManageTask
         {
           path: 'taskDetails/:id',
           element: <TaskDetails></TaskDetails>,
-          // loader: ({params}) => fetch(`http://localhost:5000/tasks/id/${params.id}`)
-          loader: ({params}) => fetch(`http://localhost:5000/tasks/email/${params.id}`)
+          // loader: ({params}) => fetch(`https://pico-server.vercel.app/tasks/id/${params.id}`)
+          loader: ({params}) => fetch(`https://pico-server.vercel.app/tasks/email/${params.id}`)
 
         },
         {

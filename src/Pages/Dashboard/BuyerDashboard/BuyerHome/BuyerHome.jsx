@@ -34,7 +34,7 @@ const BuyerHome = () => {
 
     const totalRequirement = tasks.reduce((total, item) => total + item.neededWorkers, 0)
     const totalPayment = tasks.reduce((total, item) => total + item.totalSpentCoin, 0)
-    
+
 
     const handleDetails = (submissionInfo) => {
         const submission = submissionInfo || "completed all requirements";
@@ -90,8 +90,8 @@ const BuyerHome = () => {
 
 
                         axiosSecure.post('/notifications', notificationInfo)
-                        .then(()=>{})
-                        
+                            .then(() => { })
+
 
                     }
 
@@ -126,7 +126,7 @@ const BuyerHome = () => {
                 </div>
 
                 <div className="overflow-x-auto m-14 mt-0">
-                    <table className="table">
+                    <table className="table hidden md:table">
                         {/* head */}
                         <thead>
                             <tr>
@@ -156,11 +156,66 @@ const BuyerHome = () => {
                                     </td>
                                 </tr>)
                             }
-                            
+
                         </tbody>
                     </table>
                 </div>
-                
+
+
+                {/* Card layout for smaller screens */}
+                <div className="md:hidden">
+                    {submissions.map((submit, idx) => (
+                        <div
+                            key={idx}
+                            className="border rounded-lg p-4 mb-4 bg-base-200 shadow-md"
+                        >
+                            <p className="font-bold">Task #{idx + 1}</p>
+                            <p>
+                                <strong>Title:</strong> {submit.task_title}
+                            </p>
+                            <p>
+                                <strong>Worker Name:</strong> {submit.worker_name}
+                            </p>
+                            <p>
+                                <strong>Payable Amount:</strong> {submit.payable_amount}
+                            </p>
+                            <p>
+                                <strong>Status:</strong> {submit.status}
+                            </p>
+                            <div className="mt-2">
+                                <button
+                                    onClick={() => handleDetails(submit.submissionInfo)}
+                                    className="btn btn-sm btn-primary"
+                                >
+                                    View Submission Details
+                                </button>
+                            </div>
+                            <div className="mt-2">
+                                <select
+                                    onChange={(e) =>
+                                        handleStatus(
+                                            e,
+                                            submit._id,
+                                            submit.payable_amount,
+                                            submit.worker_email,
+                                            submit.neededWorkers,
+                                            submit.task_id,
+                                            submit.task_title
+                                        )
+                                    }
+                                    className="select select-bordered select-sm w-full"
+                                >
+                                    <option defaultValue={submit.status || "pending"}>
+                                        {submit.status}
+                                    </option>
+                                    <option value="approved">approved</option>
+                                    <option value="rejected">rejected</option>
+                                </select>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
 
             </div>
 
@@ -179,7 +234,7 @@ const BuyerHome = () => {
                     </div>
                 </div>
             </dialog>
-            
+
 
         </div>
     );

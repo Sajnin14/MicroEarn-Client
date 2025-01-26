@@ -15,7 +15,7 @@ const ManageTask = () => {
     })
 
     const handleDelete = (id) => {
-        
+
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -24,28 +24,28 @@ const ManageTask = () => {
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, delete it!"
-          }).then(async (result) => {
+        }).then(async (result) => {
             if (result.isConfirmed) {
-             const res = await axiosSecure.delete(`/tasks/email/${id}`)
-             if(res.data.deletedCount){
-                refetch();
-                Swal.fire({
-                    title: "Deleted!",
-                    text: "Your file has been deleted.",
-                    icon: "success"
-                  });
-             }
+                const res = await axiosSecure.delete(`/tasks/email/${id}`)
+                if (res.data.deletedCount) {
+                    refetch();
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your file has been deleted.",
+                        icon: "success"
+                    });
+                }
 
             }
-          });
-       
+        });
+
     }
 
     return (
         <div>
             <SectionTitle heading='All Tasks List' subHeading='Manage All Tasks here'></SectionTitle>
 
-            <div className="overflow-x-auto pr-12">
+            <div className="overflow-x-auto hidden md:block pr-12">
                 <table className="table table-zebra">
                     {/* head */}
                     <thead>
@@ -72,7 +72,7 @@ const ManageTask = () => {
                                 <td>{task.completionDate}</td>
                                 <td>{task.buyerEmail}</td>
                                 <td><button onClick={() => handleDelete(task._id)}><RiDeleteBin6Fill className="text-red-600 text-lg" /></button> </td>
-                                
+
 
                             </tr>)
                         }
@@ -80,6 +80,41 @@ const ManageTask = () => {
 
                     </tbody>
                 </table>
+            </div>
+
+            <div className="md:hidden">
+                {tasks.map((task, index) => (
+                    <div key={index} className="border rounded-lg p-4 mb-4 bg-base-200 shadow-md">
+                        <p className="font-bold">Task #{index + 1}</p>
+                        <p>
+                            <strong>Title:</strong> {task.title}
+                        </p>
+                        <p>
+                            <strong>Details:</strong> {task.details}
+                        </p>
+                        <p>
+                            <strong>Pay Coin:</strong> {task.payCoin}
+                        </p>
+                        <p>
+                            <strong>Needed Workers:</strong> {task.neededWorkers}
+                        </p>
+                        <p>
+                            <strong>Completion Date:</strong> {task.completionDate}
+                        </p>
+                        <p>
+                            <strong>Buyer Email:</strong> {task.buyerEmail}
+                        </p>
+                        <div className="flex justify-start mt-3">
+                            <button
+                                onClick={() => handleDelete(task._id)}
+                                className="btn btn-sm btn-error"
+                            >
+                                <RiDeleteBin6Fill className="text-lg mr-1" />
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                ))}
             </div>
         </div>
     );

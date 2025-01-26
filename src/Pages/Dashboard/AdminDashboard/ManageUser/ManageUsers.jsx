@@ -1,4 +1,4 @@
-import {useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import SectionTitle from "../../../../Sections/SectionTitle/SectionTitle";
 import { RiDeleteBin6Fill } from "react-icons/ri";
@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 const ManageUsers = () => {
     const [users, setUsers] = useState([])
     const axiosSecure = useAxiosSecure();
-    
+
 
 
     useEffect(() => {
@@ -17,7 +17,7 @@ const ManageUsers = () => {
             })
     }, [axiosSecure])
 
-    
+
 
     const handleDelete = (id) => {
 
@@ -29,23 +29,23 @@ const ManageUsers = () => {
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, delete it!"
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
-              axiosSecure.delete(`/users/${id}`)
-              .then(res => {
-            
-                if(res.data.deletedCount){
-                    setUsers(users.filter(user => user._id !== id));
-                    Swal.fire({
-                        title: "Deleted!",
-                        text: "Your file has been deleted.",
-                        icon: "success"
-                      });
-                }
-              })
+                axiosSecure.delete(`/users/${id}`)
+                    .then(res => {
+
+                        if (res.data.deletedCount) {
+                            setUsers(users.filter(user => user._id !== id));
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success"
+                            });
+                        }
+                    })
 
             }
-          });
+        });
     }
 
     const handleRole = (e, id) => {
@@ -54,41 +54,41 @@ const ManageUsers = () => {
         // const data = {
         //     role: value,
         // }
-            Swal.fire({
-                title: "Are you sure?",
-                text: "You want to update the role?",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes,Update it!"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    axiosSecure.patch(`/users/${id}`, {role : newRole})
-                        .then(res => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You want to update the role?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes,Update it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.patch(`/users/${id}`, { role: newRole })
+                    .then(res => {
 
-                            if (res.data.modifiedCount) {
-                                setUsers(users.map(user => 
-                                    user._id === id ? {...user, role: newRole} : user) )
-                                Swal.fire({
-                                    title: "Updated!",
-                                    text: "User role has been updated.",
-                                    icon: "success"
-                                });
+                        if (res.data.modifiedCount) {
+                            setUsers(users.map(user =>
+                                user._id === id ? { ...user, role: newRole } : user))
+                            Swal.fire({
+                                title: "Updated!",
+                                text: "User role has been updated.",
+                                icon: "success"
+                            });
 
-                            }
-                        })
+                        }
+                    })
 
-                }
+            }
 
-            });
+        });
 
     }
     return (
         <div>
             <SectionTitle heading='Manage All Users' subHeading='Manage all the users according to perforfance'></SectionTitle>
 
-            <div className="overflow-x-auto p-12">
+            <div className="overflow-x-auto hidden md:block p-12">
                 <table className="table">
                     {/* head */}
                     <thead>
@@ -143,6 +143,51 @@ const ManageUsers = () => {
                     </tbody>
 
                 </table>
+            </div>
+
+            {/* Card layout for smaller screens */}
+            <div className="md:hidden">
+                {users.map((user, index) => (
+                    <div
+                        key={index}
+                        className="border rounded-lg p-4 mb-4 bg-base-200 shadow-md"
+                    >
+                        <div className="flex items-center gap-3">
+                            <div className="avatar">
+                                <div className="mask mask-squircle h-12 w-12">
+                                    <img src={user.photo} alt="" />
+                                </div>
+                            </div>
+                            <div>
+                                <div className="font-bold">{user.name}</div>
+                                <div className="text-sm opacity-50">{user.email}</div>
+                            </div>
+                        </div>
+                        <p className="mt-3">
+                            <strong>Coin:</strong> {user.coin}
+                        </p>
+                        <p>
+                            <strong>Role:</strong> {user.role}
+                        </p>
+                        <div className="flex justify-between items-center mt-4">
+                            <button
+                                onClick={() => handleDelete(user._id)}
+                                className="btn btn-error btn-sm flex items-center gap-1"
+                            >
+                                <RiDeleteBin6Fill className="text-lg" /> Delete
+                            </button>
+                            <select
+                                onChange={(e) => handleRole(e, user._id)}
+                                className="select select-bordered select-sm"
+                            >
+                                <option value={user?.role}>{user.role}</option>
+                                <option value="Worker">Worker</option>
+                                <option value="buyer">Buyer</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                        </div>
+                    </div>
+                ))}
             </div>
         </div>
 

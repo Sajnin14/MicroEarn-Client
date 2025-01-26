@@ -21,7 +21,7 @@ const Navbar = () => {
 
     
     return (
-        <div className="bg-[#E6F2FF] sticky top-0 z-40 py-2">
+        <div className="bg-[#E6F2FF] w-full sticky top-0 z-40 py-2">
             <div className="navbar w-11/12 mx-auto">
                 <div className="navbar-start">
                     <div className="dropdown">
@@ -43,9 +43,16 @@ const Navbar = () => {
                             tabIndex={0}
                             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                             {links}
+                            {
+                            user?.email ? <button className="font-semibold ml-2" onClick={() => logout()}>logout</button> 
+                           : <div className="space-x-2 font-semibold">
+                                <NavLink to='/login'>Login</NavLink>
+                                <NavLink to='/register'>Register</NavLink>
+                            </div>
+                        }
                         </ul>
                     </div>
-                    <Link to='/' className="btn btn-ghost text-2xl text-[#007BFF] inline font-semibold">Micro<span className="text-[#FFC107]">Earn</span></Link>
+                    <Link to='/' className="btn btn-ghost text-base md:text-2xl text-[#007BFF] inline font-semibold">Micro<span className="text-[#FFC107]">Earn</span></Link>
 
                 </div>
                 <div className="navbar-center hidden lg:flex">
@@ -75,7 +82,9 @@ const Navbar = () => {
 
                         </div> : <div><IoPersonCircleOutline className="text-4xl"></IoPersonCircleOutline></div>
                     }
-                    <a className="btn bg-[#007BFF] text-white" href="https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-Sajnin14" target="blank">Join As Developer</a>
+                    <a className="btn bg-[#007BFF] text-base text-white hidden md:block" href="https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-Sajnin14" target="blank">Join As Developer</a>
+
+                    <a className="p-1 rounded-md md:hidden bg-[#007BFF] text-xs text-white" href="https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-Sajnin14" target="blank">As Dev</a>
 
                 </div>
             </div>

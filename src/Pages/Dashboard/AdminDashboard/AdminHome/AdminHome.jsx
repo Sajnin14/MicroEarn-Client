@@ -20,10 +20,10 @@ const AdminHome = () => {
 
     useEffect(() => {
         axiosSecure.get('/tasks')
-        .then(res => {
-            setTasks(res.data);
-        })
-    },[axiosSecure])
+            .then(res => {
+                setTasks(res.data);
+            })
+    }, [axiosSecure])
 
 
     const { data: withdrawals = [], refetch } = useQuery({
@@ -34,11 +34,11 @@ const AdminHome = () => {
         },
     })
 
-    const handleStatus = (e, withdrawId, worker_email, withdrawal_coin, update)=> {
+    const handleStatus = (e, withdrawId, worker_email, withdrawal_coin, update) => {
         e.preventDefault();
         // const update = e.target.value;
         const value = {
-            status : update
+            status: update
         }
 
         const withdrawCoin = parseInt(withdrawal_coin)
@@ -62,39 +62,39 @@ const AdminHome = () => {
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, permit!"
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
                 axiosSecure.patch(`/withdrawals/${withdrawId}`, value)
-                .then(res => {
-                    if(res.data.modifiedCount){
-                        refetch();
-                        Swal.fire({
-                            title: "Withdraw done!",
-                            icon: "success"
-                          });
-                        
-                        axiosSecure.post('/notifications', notificationInfo)
-                        .then(() => {
-                        })
+                    .then(res => {
+                        if (res.data.modifiedCount) {
+                            refetch();
+                            Swal.fire({
+                                title: "Withdraw done!",
+                                icon: "success"
+                            });
 
-                        if(value.status === 'approved'){
-                            axiosSecure.patch(`/users/coin/${worker_email}`, {coinUpdate : withdrawCoin , status : 'decrease'})
-                            .then(res => {
-                                if(res.data.modifiedCount){
-                                    refetch();
-                                }
-                            })
+                            axiosSecure.post('/notifications', notificationInfo)
+                                .then(() => {
+                                })
+
+                            if (value.status === 'approved') {
+                                axiosSecure.patch(`/users/coin/${worker_email}`, { coinUpdate: withdrawCoin, status: 'decrease' })
+                                    .then(res => {
+                                        if (res.data.modifiedCount) {
+                                            refetch();
+                                        }
+                                    })
+                            }
                         }
-                    }
-                })
-              
+                    })
+
             }
-          });
-        
+        });
+
     }
 
     const totalCoin = users.reduce((total, item) => total + item.coin, 0);
-    
+
     const totalWorkers = users.filter(users => users.role?.toLowerCase() === 'worker');
     const totalBuyers = users.filter(users => users.role?.toLowerCase() === 'buyer');
 
@@ -113,7 +113,7 @@ const AdminHome = () => {
 
 
             <div className="m-10">
-                <div className="overflow-x-auto">
+                <div className="overflow-x-auto hidden md:block">
                     <table className="table table-zebra">
                         {/* head */}
                         <thead>
@@ -129,7 +129,7 @@ const AdminHome = () => {
                             </tr>
                         </thead>
                         <tbody>
-                           
+
                             {
                                 withdrawals.map((withdraw, index) => <tr key={index}>
                                     <th>{index + 1}</th>
@@ -144,13 +144,57 @@ const AdminHome = () => {
                                             {/* <input type="text" className="border border-yellow-600 py-1 mx-3 rounded-lg" readOnly value='approved' /> */}
                                             payment-success
                                         </button>
-                                        
+
                                     </td>
                                 </tr>)
                             }
 
                         </tbody>
                     </table>
+                </div>
+
+                <div className="md:hidden">
+                    {withdrawals.map((withdraw, index) => (
+                        <div
+                            key={index}
+                            className="border rounded-lg p-4 mb-4 bg-base-200 shadow-md"
+                        >
+                            <p className="font-bold">Withdraw #{index + 1}</p>
+                            <p>
+                                <strong>Worker Email:</strong> {withdraw.worker_email}
+                            </p>
+                            <p>
+                                <strong>Withdrawal Coin:</strong> {withdraw.withdrawal_coin}
+                            </p>
+                            <p>
+                                <strong>Withdrawal Amount:</strong> {withdraw.withdrawal_amount}
+                            </p>
+                            <p>
+                                <strong>Payment System:</strong> {withdraw.payment_system}
+                            </p>
+                            <p>
+                                <strong>Withdraw Date:</strong> {withdraw.withdraw_date}
+                            </p>
+                            <p>
+                                <strong>Status:</strong> {withdraw.status}
+                            </p>
+                            <button
+                                disabled={withdraw.status === "approved"}
+                                className="btn mt-2"
+                                onClick={(e) =>
+                                    handleStatus(
+                                        e,
+                                        withdraw._id,
+                                        withdraw.worker_email,
+                                        withdraw.withdrawal_coin,
+                                        "approved"
+                                    )
+                                }
+                            >
+                                Payment Success
+                            </button>
+                        </div>
+                    ))}
                 </div>
             </div>
         </div>

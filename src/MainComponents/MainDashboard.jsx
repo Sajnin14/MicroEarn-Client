@@ -12,10 +12,10 @@ const MainDashboard = () => {
   const [userInfo] = useUser();
   
     return (
-        <div>
+        <div className="w-full">
           <DashboardNav></DashboardNav>  
-          <div className="grid grid-cols-4">
-            <div className="col-span-1 bg-yellow-200 py-10">
+          <div className="grid grid-cols-1 lg:grid-cols-4">
+            <div className="lg:col-span-1 bg-yellow-200 py-10">
               {
                 userInfo?.role === 'buyer' && <BuyerNavigation></BuyerNavigation>
               }
@@ -28,7 +28,7 @@ const MainDashboard = () => {
                 userInfo?.role === 'admin' && <AdminNavigation></AdminNavigation>
               }
             </div>
-            <div className="col-span-3">
+            <div className="lg:col-span-3">
                 <Outlet></Outlet>
                 <Footer></Footer>
             </div>

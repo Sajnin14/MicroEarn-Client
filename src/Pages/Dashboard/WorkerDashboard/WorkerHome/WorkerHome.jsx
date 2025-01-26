@@ -26,7 +26,7 @@ const WorkerHome = () => {
         <div>
             <SectionTitle heading={`Welcome ${userInfo.name}`} subHeading='explore your submitted tasks'> </SectionTitle>
 
-            <div className="m-10">
+            <div className="m-3 md:m-7 lg:m-10">
                 <div className="flex flex-col lg:flex-row items-center justify-between my-10 text-xl font-bold">
                     <p>Total Submitted Task: {submissions.length}</p>
                     <p>Total Pending Task: {pendingSubmission.length}</p>
@@ -35,7 +35,7 @@ const WorkerHome = () => {
                 </div>
 
                 <div className="overflow-x-auto">
-                    <table className="table table-zebra">
+                    <table className="table table-zebra hidden md:table">
                         {/* head */}
                         <thead>
                             <tr>
@@ -61,6 +61,23 @@ const WorkerHome = () => {
 
                         </tbody>
                     </table>
+                </div>
+
+
+                {/* Mobile View */}
+                <div className="md:hidden">
+                    {approvedSubmission.map((approve, index) => (
+                        <div
+                            key={index}
+                            className="border rounded-lg p-4 mb-2 bg-base-200 shadow-md"
+                        >
+                            <p><strong>Task #{index + 1}</strong></p>
+                            <p><strong>Title:</strong> {approve.task_title}</p>
+                            <p><strong>Amount:</strong> {approve.payable_amount}</p>
+                            <p><strong>Buyer:</strong> {approve.Buyer_name}</p>
+                            <p><strong>Status:</strong> {approve.status}</p>
+                        </div>
+                    ))}
                 </div>
             </div>
 

@@ -18,7 +18,7 @@ const DashboardNav = () => {
     }, [axiosSecure, userInfo?.email])
 
     return (
-        <div className="bg-[#E6F2FF] py-3 sticky z-40 top-0">
+        <div className="bg-[#E6F2FF] w-full py-3 sticky z-40 top-0">
             <div className="navbar w-11/12 mx-auto">
                 <div className="flex-1">
                     <Link to='/' className="btn btn-ghost text-2xl text-[#007BFF] inline font-semibold">Micro<span className="text-[#FFC107]">Earn</span></Link>

@@ -60,12 +60,12 @@ const WorkerSubmissions = () => {
         <div>
             <SectionTitle heading='My Submissions' subHeading='--tasks I submitted--'></SectionTitle>
 
-            <div className="overflow-x-auto m-14 mt-0">
+            <div className="overflow-x-auto md:m-14 mt-0">
                 <table className="table">
                     {/* head */}
                     <thead>
-                        <tr>
-                            <th></th>
+                        <tr className="text-xs md:text-base">
+                            <th className="hidden md:block"></th>
                             <th>Title</th>
                             <th>Provider Email</th>
                             <th>Status</th>
@@ -74,8 +74,8 @@ const WorkerSubmissions = () => {
                     <tbody>
 
                         {
-                            submissions.map((submit, idx) => <tr key={idx}>
-                                <th>{idx + 1}</th>
+                            submissions.map((submit, idx) => <tr key={idx} className="text-xs md:text-base">
+                                <th className="hidden md:block">{idx + 1}</th>
                                 <td>{submit.task_title}</td>
                                 <td>{submit.Buyer_email}</td>
                                 <td className="bg-slate-100 rounded-lg text-yellow-600 font-bold">{submit.status}</td>
