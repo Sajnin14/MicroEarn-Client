@@ -30,8 +30,7 @@ const UpdateTask = () => {
           }).then(async (result) => {
             if (result.isConfirmed) {
                 axiosSecure.patch(`/tasks/email/${loader._id}`, updateInfo)
-                .then(res => {
-                    console.log(res.data);
+                .then(res => {            
                     if(res.data.modifiedCount){
                         Swal.fire({
                             title: "Updated!",

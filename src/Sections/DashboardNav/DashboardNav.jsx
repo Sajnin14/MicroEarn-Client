@@ -13,7 +13,6 @@ const DashboardNav = () => {
     useEffect(() => {
         axiosSecure.get(`/notifications/${userInfo.email}`)
             .then(res => {
-                console.log(res.data);
                 setNotifications(res.data);
             })
     }, [axiosSecure, userInfo?.email])

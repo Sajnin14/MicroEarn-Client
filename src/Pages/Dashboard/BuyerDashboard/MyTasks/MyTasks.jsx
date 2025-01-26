@@ -43,10 +43,7 @@ const MyTasks = () => {
                     axiosSecure.patch(`/users/coin/${userInfo.email}`, { coinUpdate: totalCoin, status: 'increase' })
                     .then(() => {
                         refetch();
-                        // if (res.data.modifiedCount > 0) {
-                        //     console.log(res.data);
-                        // }
-
+                        
                     })
                     refetch();
                     Swal.fire({

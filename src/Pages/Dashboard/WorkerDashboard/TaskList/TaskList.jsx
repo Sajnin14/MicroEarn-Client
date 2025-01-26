@@ -12,7 +12,6 @@ const TaskList = () => {
     useEffect(() => {
         axiosSecure.get('/tasks')
             .then(res => {
-                console.log(res.data);
                 setTasks(res.data)
             })
     }, [axiosSecure])

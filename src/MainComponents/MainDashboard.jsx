@@ -9,22 +9,8 @@ import useUser from "../hooks/useUser";
 
 const MainDashboard = () => { 
 
-  // const {currentUserInfo} = useAuth();
   const [userInfo] = useUser();
-  // console.log(userInfo);
-
-  // const axiosSecure = useAxiosSecure();
-  // const [currentUserInfo, setCurrentUserInfo] = useState();
-  // console.log(currentUserInfo);
-  // useEffect(() => {
-  //   axiosSecure.get(`/users/${user.email}`)
-  //   .then(res => {
-  //     setCurrentUserInfo(res.data);
-  //     console.log(res.data);
-  //   })
-  // },[axiosSecure, user?.email])
   
-
     return (
         <div>
           <DashboardNav></DashboardNav>  

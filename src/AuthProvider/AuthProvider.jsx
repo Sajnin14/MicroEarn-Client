@@ -43,13 +43,6 @@ const AuthProvider = ({ children }) => {
         return signOut(auth);
     }
 
-    // useEffect(() => {
-    //     axiosSecure.get(`/users/${user?.email}`)
-    //     .then(res => {
-    //         setCurrentUserInfo(res.data);
-    //       })
-    //   },[axiosSecure, user?.email])
-
 
     useEffect(() => {
         const stateChange = onAuthStateChanged(auth, (currentUser) => {
@@ -60,8 +53,6 @@ const AuthProvider = ({ children }) => {
 
                 axiosPublic.post('/jwt', userEmail)
                     .then(res => {
-                        console.log(res);
-
                         if (res.data.token) {
                             localStorage.setItem('access-token', res.data.token);
                             // setUser(currentUser);

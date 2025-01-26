@@ -11,8 +11,7 @@ const Withdrawals = () => {
 
     const currentCoin = userInfo.coin;
     const withdrawalsAmount = parseFloat(currentCoin / 20);
-    // console.log(withdrawalsAmount);
-
+   
     const { register, formState: { errors }, setValue, handleSubmit } = useForm();
 
     useEffect(() => {
@@ -22,7 +21,6 @@ const Withdrawals = () => {
 
     const onSubmit = data => {
        
-        console.log(data);
         const withDrawalInfo = {
             worker_email: userInfo.email,
             worker_name: userInfo.name,
@@ -33,11 +31,9 @@ const Withdrawals = () => {
             status: 'pending'
         }
 
-        console.log(withDrawalInfo);
         
         axiosSecure.post('/withdrawals', withDrawalInfo)
         .then(res => {
-            console.log(res.data)
             if(res.data.insertedCount){
                 Swal.fire({
                     icon: "success",

@@ -10,7 +10,6 @@ export const imageUploade = async(imageData) => {
      // send image to imgbb
      const {data} = await axios.post(imageHostingApi, formData )
      const imageURL = data.data.display_url;  
-     console.log(imageURL);
      
      return imageURL;
 

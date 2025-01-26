@@ -17,8 +17,6 @@ const BestWorkers = () => {
 
     const topWorkers = totalWorkers.sort((a, b) => b.coin - a.coin).slice(0, 6);
 
-    console.log(topWorkers);
-
     return (
         <div>
             <SectionTitle heading='Best Workers' subHeading='Honoring Our Best MicroEarn Achievers!'></SectionTitle>

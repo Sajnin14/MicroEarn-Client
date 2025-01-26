@@ -14,7 +14,6 @@ const TaskDetails = () => {
     const handleSubmit =async(e) => {
         e.preventDefault();
         const submit = e.target.submit.value;
-        // console.log(submit);
         
         const submitInfo = {
             submissionInfo: submit,
@@ -40,12 +39,8 @@ const TaskDetails = () => {
             time: new Date(),
         }
 
-        console.log(notificationInfo);
-
-
 
         const res = await axiosSecure.post('/submitTask', submitInfo)
-        console.log(res.data);
         if(res.data.insertedCount){
             Swal.fire({
                 title: "Task Submission completed!",
@@ -54,8 +49,8 @@ const TaskDetails = () => {
               });
 
             axiosSecure.post('/notifications', notificationInfo)
-            .then(res => {
-                console.log(res.data)
+            .then(() => {
+               
             })
 
             navigate('/dashboard/workerSubmissions')

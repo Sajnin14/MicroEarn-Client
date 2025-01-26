@@ -41,10 +41,7 @@ const AdminHome = () => {
             status : update
         }
 
-        console.log(value);
-
         const withdrawCoin = parseInt(withdrawal_coin)
-        console.log(withdrawCoin);
 
         const notificationInfo = {
             status: value.status,
@@ -55,7 +52,6 @@ const AdminHome = () => {
             time: new Date(),
         }
 
-        console.log(notificationInfo);
 
 
         Swal.fire({
@@ -78,14 +74,12 @@ const AdminHome = () => {
                           });
                         
                         axiosSecure.post('/notifications', notificationInfo)
-                        .then(res => {
-                            console.log(res.data);
+                        .then(() => {
                         })
 
                         if(value.status === 'approved'){
                             axiosSecure.patch(`/users/coin/${worker_email}`, {coinUpdate : withdrawCoin , status : 'decrease'})
                             .then(res => {
-                                console.log(res.data);
                                 if(res.data.modifiedCount){
                                     refetch();
                                 }
@@ -100,7 +94,7 @@ const AdminHome = () => {
     }
 
     const totalCoin = users.reduce((total, item) => total + item.coin, 0);
-    // console.log(totalCoin);
+    
     const totalWorkers = users.filter(users => users.role?.toLowerCase() === 'worker');
     const totalBuyers = users.filter(users => users.role?.toLowerCase() === 'buyer');
 
@@ -150,10 +144,7 @@ const AdminHome = () => {
                                             {/* <input type="text" className="border border-yellow-600 py-1 mx-3 rounded-lg" readOnly value='approved' /> */}
                                             payment-success
                                         </button>
-                                        {/* <select onChange={(e) => handleStatus(e, withdraw._id, withdraw.worker_email, withdraw.withdrawal_coin)} className="select select-bordered select-xs w-full max-w-xs">
-                                            <option defaultValue={withdraw.status || 'pending'}>{withdraw.status}</option>
-                                            <option value='approved'>approved</option>
-                                        </select> */}
+                                        
                                     </td>
                                 </tr>)
                             }

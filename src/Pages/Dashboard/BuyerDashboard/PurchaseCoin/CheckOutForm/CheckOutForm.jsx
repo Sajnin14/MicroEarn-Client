@@ -7,9 +7,7 @@ import useUser from "../../../../../hooks/useUser";
 
 
 const CheckOutForm = ({ dollar, coin }) => {
-    console.log(dollar, coin);
-    // const dollarNum = parseInt(dollar);
-    // const coinNum = parseInt(coin);
+    
     const [error, setError] = useState('');
     const [clientSecret, setClientSecret] = useState('');
     const [transactionId, setTransactionId] = useState('');
@@ -24,7 +22,6 @@ const CheckOutForm = ({ dollar, coin }) => {
         if(dollar){
             axiosSecure.post('/create-payment-intent', { price:  dollar })
             .then(res => {
-                console.log(res.data.clientSecret);
                 setClientSecret(res.data.clientSecret);
             })
 
@@ -53,11 +50,12 @@ const CheckOutForm = ({ dollar, coin }) => {
             card,
         });
 
+        console.log(paymentMethod);
+
         if (error) {
             setError(error.message);
         }
         else {
-            console.log('payment method = ', paymentMethod);
             setError('');
         }
 
@@ -72,11 +70,10 @@ const CheckOutForm = ({ dollar, coin }) => {
             }
         })
         if (finalError) {
-            console.log('payment error', error);
+            // console.log('payment error', error);
         }
 
         else {
-            console.log('payment Intent', paymentIntent);
             if (paymentIntent.status === "succeeded") {
                 
                 // code for increasing coin after purchase
@@ -84,7 +81,6 @@ const CheckOutForm = ({ dollar, coin }) => {
                 console.log(res.data);
                 refetch();
 
-                console.log('payment success = ', paymentIntent.id);
                 setTransactionId(paymentIntent.id);
 
                 const payment = {
@@ -97,8 +93,7 @@ const CheckOutForm = ({ dollar, coin }) => {
                 }
 
                 axiosSecure.post('/paymentsHistory', payment)
-                .then(res => {
-                    console.log(res.data);
+                .then(() => {
                     
                 })
 

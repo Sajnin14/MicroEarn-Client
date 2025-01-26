@@ -19,7 +19,6 @@ const PurchaseCoin = () => {
         axios('/purchase.json')
             .then(res => {
                 setBuyCoin(res.data);
-                console.log(res.data);
             })
     }, [])
 

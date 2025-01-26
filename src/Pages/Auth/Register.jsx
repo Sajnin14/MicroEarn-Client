@@ -5,7 +5,6 @@ import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { imageUploade } from "../../hooks/imageUploade";
 
 
-
 const Register = () => {
     const { setUser, createUser, updateUser } = useAuth();
     const axiosPublic = useAxiosPublic();
@@ -23,9 +22,6 @@ const Register = () => {
         const option = form.option.value;
         const password = form.password.value;
         const image = form.photo.files[0];
-
-        console.log(image);
-
 
         const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z]).{6,}$/;
         if (!passwordRegex.test(password)) {
@@ -51,8 +47,7 @@ const Register = () => {
                 setIsError(false);
                 setUser(res.send);
 
-                const photoBB = await imageUploade(image)
-                console.log(photoBB);
+                const photoBB = await imageUploade(image);
 
                 updateUser({ displayName: name, photoURL: photoBB })
                     .then( async() => {
@@ -65,13 +60,12 @@ const Register = () => {
                             coin: coinValue,
                         }
 
-                        const users = await axiosPublic.post('/users', userInfo)
-                        console.log(users.data);
-
+                       axiosPublic.post('/users', userInfo)
+                       .then(() => {})
 
                     })
-                    .catch(err => {
-                        console.log(err.message)
+                    .catch(() => {
+                        
                     })
                 setTimeout(() => {
                     navigate('/dashboard');
@@ -81,10 +75,7 @@ const Register = () => {
             .catch(err => {
                 setIsError(true);
                 setError(err.message);
-                console.log(err.message);
             })
-
-        // console.log(name, email, image, option, coinValue, password);
     }
 
     return (

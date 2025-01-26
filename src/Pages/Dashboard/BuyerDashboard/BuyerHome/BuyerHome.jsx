@@ -15,7 +15,6 @@ const BuyerHome = () => {
     const axiosSecure = useAxiosSecure();
     const [submitInfo, setSubmitInfo] = useState('Task Completed');
     const location = useLocation();
-    console.log(location.pathname);
 
     const { data: tasks = [], refetch } = useQuery({
         queryKey: ['tasks', userInfo?.email],
@@ -35,12 +34,11 @@ const BuyerHome = () => {
 
     const totalRequirement = tasks.reduce((total, item) => total + item.neededWorkers, 0)
     const totalPayment = tasks.reduce((total, item) => total + item.totalSpentCoin, 0)
-    console.log(totalPayment);
+    
 
     const handleDetails = (submissionInfo) => {
         const submission = submissionInfo || "completed all requirements";
         setSubmitInfo(submission);
-        // console.log(submission);
         document.getElementById('my_modal_1').showModal();
 
     }
@@ -63,10 +61,6 @@ const BuyerHome = () => {
             neededWorkers: updatedNeeded,
             totalSpentCoin: total,
         };
-
-
-        console.log(updateInfo);
-
 
 
         const message = data.status === 'approved' ? `you have earned ${payable_amount} from ${userInfo.name} for completing $"{title}"` : `${userInfo.name} rejects your task ${title}`
@@ -95,8 +89,9 @@ const BuyerHome = () => {
                         }
 
 
-                        const notify = await axiosSecure.post('/notifications', notificationInfo)
-                        console.log(notify.data);
+                        axiosSecure.post('/notifications', notificationInfo)
+                        .then(()=>{})
+                        
 
                     }
 
@@ -107,7 +102,6 @@ const BuyerHome = () => {
                             .then(res => {
                                 if (res.data.modifiedCount) {
                                     refetch();
-                                    console.log(res.data);
                                 }
                             })
 

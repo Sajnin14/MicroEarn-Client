@@ -13,22 +13,13 @@ const Navbar = () => {
         {
             user?.email && <>
                 <NavLink to='/dashboard'>Dashboard</NavLink>
-                <Link className="font-bold">Coin : {userInfo.coin}</Link>
+                <Link className="font-bold underline">Coin : {userInfo.coin}</Link>
             </>
         }
-
-
-        {/* <li><a>Item 3</a></li> */}
+ 
     </div>
 
-    // const handleLogOut = () => {
-    //     console.log('logout button clicked');
-    //     logout()
-    //     .then(() => {
-    // 
-    //     })
-    //     .catch(error => console.log(error.code))
-    // }
+    
     return (
         <div className="bg-[#E6F2FF] sticky top-0 z-40 py-2">
             <div className="navbar w-11/12 mx-auto">

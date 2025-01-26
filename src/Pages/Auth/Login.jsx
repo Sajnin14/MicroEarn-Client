@@ -20,13 +20,10 @@ const Login = () => {
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(password, email);
 
         loginUser(email, password)
-            .then((res) => {
-                console.log(res.user);
+            .then(() => {
                 setError(false);
-                // navigate('/');
                 navigate('/dashboard'); 
                 // navigate(path, {replace: true});
             })

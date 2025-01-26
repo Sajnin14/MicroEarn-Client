@@ -37,7 +37,7 @@ const AddTask = () => {
 
         const totalCoin = userInfo.coin;
         const totalAmmount = ammount * neededWorkers;
-        console.log(totalAmmount, totalCoin);
+
         if (totalAmmount > totalCoin) {
 
             Swal.fire({
@@ -66,8 +66,6 @@ const AddTask = () => {
             buyerEmail: userInfo.email,
         }
 
-        console.log(tasksInfo);
-
 
          
         
@@ -75,7 +73,6 @@ const AddTask = () => {
             .then(res => {
                 if (res.data.modifiedCount > 0) {
                     refetch();
-                    console.log(res.data);
                 }
                 Swal.fire({
                     title: "tasks has been added!",
@@ -88,16 +85,12 @@ const AddTask = () => {
                     .then(res => {
                         if (res.data.modifiedCount > 0) {
                             refetch();
-                            console.log(res.data);
                         }
 
                     })
 
                 navigate('/dashboard/myTasks')
             })
-
-        // axiosSecure.post('/tasks', )
-        // console.log(title, taskImage, ammount, neededWorkers, date, submission, details);
 
 
     }

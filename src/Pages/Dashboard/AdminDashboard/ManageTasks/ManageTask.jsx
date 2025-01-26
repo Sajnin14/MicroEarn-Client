@@ -41,7 +41,6 @@ const ManageTask = () => {
        
     }
 
-    console.log(tasks);
     return (
         <div>
             <SectionTitle heading='All Tasks List' subHeading='Manage All Tasks here'></SectionTitle>

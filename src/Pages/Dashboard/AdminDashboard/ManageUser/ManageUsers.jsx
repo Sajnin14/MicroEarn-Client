@@ -20,7 +20,7 @@ const ManageUsers = () => {
     
 
     const handleDelete = (id) => {
-        console.log(id);
+
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -33,7 +33,7 @@ const ManageUsers = () => {
             if (result.isConfirmed) {
               axiosSecure.delete(`/users/${id}`)
               .then(res => {
-                console.log(res.data)
+            
                 if(res.data.deletedCount){
                     setUsers(users.filter(user => user._id !== id));
                     Swal.fire({
@@ -64,7 +64,6 @@ const ManageUsers = () => {
                 confirmButtonText: "Yes,Update it!"
             }).then((result) => {
                 if (result.isConfirmed) {
-                    console.log(newRole);
                     axiosSecure.patch(`/users/${id}`, {role : newRole})
                         .then(res => {
 

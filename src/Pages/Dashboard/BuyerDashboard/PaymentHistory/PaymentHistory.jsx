@@ -12,7 +12,7 @@ const PaymentHistory = () => {
     useEffect(() => {
         axiosSecure.get(`/paymentsHistory/${userInfo.email}`)
             .then(res => {
-                console.log(res.data);
+               
                 setHistory(res.data);
             })
     }, [axiosSecure, userInfo])

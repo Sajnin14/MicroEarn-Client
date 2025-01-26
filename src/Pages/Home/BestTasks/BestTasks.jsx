@@ -24,8 +24,10 @@ const BestTasks = () => {
     if(!user && user?.email){
         navigate('/login');
     }
-    navigate('/dashboard');
-
+    
+    else{
+        navigate('/dashboard');
+    }
 
    }
 
