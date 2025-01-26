@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import PropTypes from 'prop-types';
 import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import app from "../firebase/firebase.config";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
@@ -11,13 +12,12 @@ const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
 
     const googleProvider = new GoogleAuthProvider();
-   
+
     const [user, setUser] = useState('');
     const [loading, setLoading] = useState(true);
-    // const [currentUserInfo, setCurrentUserInfo] = useState();
-    // const axiosSecure = useAxiosSecure();
+    const axiosPublic = useAxiosPublic();
 
-    const createUser = (email, password) =>{
+    const createUser = (email, password) => {
         setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password);
     }
@@ -32,13 +32,13 @@ const AuthProvider = ({ children }) => {
         return signInWithPopup(auth, googleProvider);
     }
 
-    const updateUser = (updateInfo) =>{
+    const updateUser = (updateInfo) => {
         setLoading(true);
         return updateProfile(auth.currentUser, updateInfo)
     }
 
-    
-    const logout = () =>{
+
+    const logout = () => {
         setLoading(true);
         return signOut(auth);
     }
@@ -49,29 +49,49 @@ const AuthProvider = ({ children }) => {
     //         setCurrentUserInfo(res.data);
     //       })
     //   },[axiosSecure, user?.email])
-      
+
 
     useEffect(() => {
         const stateChange = onAuthStateChanged(auth, (currentUser) => {
-            if(currentUser){
-                setLoading(false);
-                setUser(currentUser);
-                
+            setUser(currentUser);
+            const userEmail = { email: currentUser.email };
+            if (currentUser) {
+
+
+                axiosPublic.post('/jwt', userEmail)
+                    .then(res => {
+                        console.log(res);
+
+                        if (res.data.token) {
+                            localStorage.setItem('access-token', res.data.token);
+                            // setUser(currentUser);
+                            setLoading(false);
+                        }
+                    })
             }
 
-            return stateChange();
+            else {
+                localStorage.removeItem('access-token');
+                // setUser(currentUser);
+                setLoading(false);
+            }
+
+            // setLoading(false);
         })
-    },[])
+
+
+        return () => stateChange();
+    }, [])
 
     const authValue = {
-       user,
-       setUser,
-       loading,
-       createUser,
-       loginUser,
-       googleSignIn,
-       updateUser,
-       logout,
+        user,
+        setUser,
+        loading,
+        createUser,
+        loginUser,
+        googleSignIn,
+        updateUser,
+        logout,
     }
 
     return (

@@ -22,11 +22,8 @@ const WorkerSubmissions = () => {
     useEffect(() => {
         axiosSecure.get(`/submitTask?email=${userInfo.email}`)
             .then(res => {
-                
-                
                 const data = res.data;
-                setCount(data.length);
-                
+                setCount(data.length); 
             })
     }, [axiosSecure, userInfo])
 

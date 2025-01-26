@@ -1,16 +1,19 @@
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { IoPersonCircleOutline } from "react-icons/io5";
+import useUser from "../../hooks/useUser";
+import './Navbar.css'
 
 const Navbar = () => {
     const { user, logout } = useAuth();
+    const [userInfo] = useUser();
 
     const links = <div className="space-x-3 mr-2 font-semibold">
         <NavLink to='/'>Home</NavLink>
         {
             user?.email && <>
                 <NavLink to='/dashboard'>Dashboard</NavLink>
-                <NavLink>Coin</NavLink>
+                <Link className="font-bold">Coin : {userInfo.coin}</Link>
             </>
         }
 

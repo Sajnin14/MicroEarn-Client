@@ -23,7 +23,7 @@ const BestWorkers = () => {
         <div>
             <SectionTitle heading='Best Workers' subHeading='Honoring Our Best MicroEarn Achievers!'></SectionTitle>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 w-11/12 mx-auto">
                 {
                     topWorkers.map(top => <div key={top._id} className="card bg-base-100 shadow-xl">
                         <figure className="px-10 pt-10">

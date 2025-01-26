@@ -92,7 +92,9 @@ import ManageTask from "../Pages/Dashboard/AdminDashboard/ManageTasks/ManageTask
         {
           path: 'taskDetails/:id',
           element: <TaskDetails></TaskDetails>,
-          loader: ({params}) => fetch(`http://localhost:5000/tasks/id/${params.id}`)
+          // loader: ({params}) => fetch(`http://localhost:5000/tasks/id/${params.id}`)
+          loader: ({params}) => fetch(`http://localhost:5000/tasks/email/${params.id}`)
+
         },
         {
           path: 'workerSubmissions',

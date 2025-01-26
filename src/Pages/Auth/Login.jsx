@@ -7,22 +7,28 @@ import Swal from "sweetalert2";
 
 
 const Login = () => {
-    const { setUser, loginUser, googleSignIn } = useAuth();
+    const {loginUser, googleSignIn } = useAuth();
     const [error, setError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
+    // const location = useLocation();
+
+    // const path = location.state?.from?.pathname || "/dashboard" ;
 
     const handleLogin = e => {
         e.preventDefault();
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
+        console.log(password, email);
 
         loginUser(email, password)
-            .then(result => {
-                setUser(result.user);
+            .then((res) => {
+                console.log(res.user);
                 setError(false);
-                navigate('/dashboard');
+                // navigate('/');
+                navigate('/dashboard'); 
+                // navigate(path, {replace: true});
             })
             .catch(error => {
                 setError(true);
@@ -33,8 +39,8 @@ const Login = () => {
 
     const handleGoogle = () => {
         googleSignIn()
-            .then(res => {
-                setUser(res.user);
+            .then(() => {
+                // setUser(res.user);
                 Swal.fire('successfully register with google' );
                 navigate('/');
             })
@@ -77,9 +83,11 @@ const Login = () => {
                             error && <p className="text-red-600 text-xs">{errorMessage}</p>
                         }
 
-                        <button onClick={handleGoogle} className="btn bg-base-300 mt-12 mx-5"><FcGoogle className="text-xl"></FcGoogle> Sign-in With Google</button>
+                       
 
                     </form>
+
+                    <button onClick={handleGoogle} className="btn bg-base-300 mt-12 mx-5"><FcGoogle className="text-xl"></FcGoogle> Sign-in With Google</button>
                 </div>
             </div>
         </div>

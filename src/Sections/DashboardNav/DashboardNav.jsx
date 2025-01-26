@@ -39,7 +39,7 @@ const DashboardNav = () => {
                         <div className="indicator">
                             <button onClick={() => document.getElementById('openNotification').showModal()}> <FaBell className="text-4xl"></FaBell>
                                 <p className="absolute w-4 h-4  rounded-full top-0 right-1 bg-yellow-500 font-bold">{notifications.length}</p></button>
-                            {/* <span className="badge badge-sm indicator-item rounded-full"></span> */}
+                            
                         </div>
                     </div>
                 </div>

@@ -9,6 +9,7 @@ const AdminHome = () => {
     const [userInfo] = useUser();
     const axiosSecure = useAxiosSecure();
     const [users, setUsers] = useState([]);
+    const [tasks, setTasks] = useState([]);
 
     useEffect(() => {
         axiosSecure.get('/users')
@@ -16,6 +17,13 @@ const AdminHome = () => {
                 setUsers(res.data);
             })
     }, [axiosSecure])
+
+    useEffect(() => {
+        axiosSecure.get('/tasks')
+        .then(res => {
+            setTasks(res.data);
+        })
+    },[axiosSecure])
 
 
     const { data: withdrawals = [], refetch } = useQuery({
@@ -96,6 +104,7 @@ const AdminHome = () => {
     const totalWorkers = users.filter(users => users.role?.toLowerCase() === 'worker');
     const totalBuyers = users.filter(users => users.role?.toLowerCase() === 'buyer');
 
+    const totalPayment = tasks.reduce((total, item) => total + item.totalSpentCoin, 0)
 
     return (
         <div>
@@ -104,8 +113,8 @@ const AdminHome = () => {
             <div className="flex flex-col lg:flex-row items-center justify-between m-10 text-xl font-bold">
                 <p>Total Workers: {totalWorkers.length}</p>
                 <p>Total Buyers: {totalBuyers.length}</p>
-                <p>Total Payment: {totalCoin}</p>
-                <p>Total Payment: </p>
+                <p>Total Coin: {totalCoin}</p>
+                <p>Total Payment: {totalPayment} </p>
             </div>
 
 

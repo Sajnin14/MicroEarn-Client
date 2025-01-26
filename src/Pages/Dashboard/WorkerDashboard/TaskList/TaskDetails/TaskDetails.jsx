@@ -14,9 +14,10 @@ const TaskDetails = () => {
     const handleSubmit =async(e) => {
         e.preventDefault();
         const submit = e.target.submit.value;
-        console.log(submit);
+        // console.log(submit);
         
         const submitInfo = {
+            submissionInfo: submit,
             task_id : loader._id,
             task_title : loader.title,
             payable_amount: loader.payCoin,

@@ -4,6 +4,7 @@ import useUser from "../../../../hooks/useUser";
 import SectionTitle from "../../../../Sections/SectionTitle/SectionTitle";
 import Swal from "sweetalert2";
 import { useLocation } from "react-router-dom";
+import { useState } from "react";
 
 
 
@@ -12,6 +13,7 @@ const BuyerHome = () => {
 
     const [userInfo] = useUser();
     const axiosSecure = useAxiosSecure();
+    const [submitInfo, setSubmitInfo] = useState('Task Completed');
     const location = useLocation();
     console.log(location.pathname);
 
@@ -35,7 +37,13 @@ const BuyerHome = () => {
     const totalPayment = tasks.reduce((total, item) => total + item.totalSpentCoin, 0)
     console.log(totalPayment);
 
+    const handleDetails = (submissionInfo) => {
+        const submission = submissionInfo || "completed all requirements";
+        setSubmitInfo(submission);
+        // console.log(submission);
+        document.getElementById('my_modal_1').showModal();
 
+    }
 
     const handleStatus = async (e, id, payable_amount, email, workersCount, task_id, title) => {
         e.preventDefault();
@@ -108,8 +116,6 @@ const BuyerHome = () => {
 
                 })
 
-
-
         }
 
     }
@@ -134,7 +140,7 @@ const BuyerHome = () => {
                                 <th>Title</th>
                                 <th>Worker Name</th>
                                 <th>Payable Amount</th>
-                                <th>View Submission</th>
+                                <th>View Submission Details</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -146,7 +152,7 @@ const BuyerHome = () => {
                                     <td>{submit.worker_name}</td>
                                     <td>{submit.payable_amount
                                     }</td>
-                                    <td><button className="btn">see details</button></td>
+                                    <td><button onClick={() => handleDetails(submit.submissionInfo)} className="btn">sumission details</button></td>
                                     <td>
                                         <select onChange={(e) => handleStatus(e, submit._id, submit.payable_amount, submit.worker_email, submit.neededWorkers, submit.task_id, submit.task_title)} className="select select-bordered select-xs w-full max-w-xs">
                                             <option defaultValue={submit.status || 'pending'}>{submit.status}</option>
@@ -156,14 +162,30 @@ const BuyerHome = () => {
                                     </td>
                                 </tr>)
                             }
-
-
+                            
                         </tbody>
                     </table>
                 </div>
-
+                
 
             </div>
+
+            {/* Open the modal using document.getElementById('ID').showModal() method */}
+            {/* <button className="btn" onClick={()=>document.getElementById('my_modal_1').showModal()}>open modal</button> */}
+
+            <dialog id="my_modal_1" className="modal">
+                <div className="modal-box">
+                    <h3 className="font-bold text-lg">Submission Details:</h3>
+                    <p className="py-4">{submitInfo}</p>
+                    <div className="modal-action">
+                        <form method="dialog">
+                            {/* if there is a button in form, it will close the modal */}
+                            <button className="btn">Close</button>
+                        </form>
+                    </div>
+                </div>
+            </dialog>
+            
 
         </div>
     );
