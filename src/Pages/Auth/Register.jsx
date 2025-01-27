@@ -7,7 +7,7 @@ import { Helmet } from "react-helmet";
 
 
 const Register = () => {
-    const { setUser, createUser, updateUser } = useAuth();
+    const { createUser, updateUser, logout } = useAuth();
     const axiosPublic = useAxiosPublic();
     const [passError, setPassError] = useState(false);
     const [isError, setIsError] = useState(false);
@@ -15,7 +15,7 @@ const Register = () => {
     const navigate = useNavigate();
 
 
-    const handleRegister = e => {
+    const handleRegister = (e) => {
         e.preventDefault();
         const form = e.target;
         const name = form.name.value;
@@ -43,15 +43,14 @@ const Register = () => {
         // setCoin(coinValue);
 
         createUser(email, password)
-            .then(async (res) => {
+            .then(async () => {
                 setPassError(false);
                 setIsError(false);
-                setUser(res.send);
 
                 const photoBB = await imageUploade(image);
 
                 updateUser({ displayName: name, photoURL: photoBB })
-                    .then( async() => {
+                    .then(async () => {
 
                         const userInfo = {
                             name: name,
@@ -61,16 +60,20 @@ const Register = () => {
                             coin: coinValue,
                         }
 
-                       axiosPublic.post('/users', userInfo)
-                       .then(() => {})
+                        await axiosPublic.post('/users', userInfo)
+                        // setTimeout(() => {
+                        //     navigate('/dashboard');
+                        // }, 1000)
+                        navigate('/');
+                        logout();
 
                     })
                     .catch(() => {
-                        
+
                     })
-                setTimeout(() => {
-                    navigate('/dashboard');
-                }, 1000);
+                // setTimeout(() => {
+                //     navigate('/dashboard');
+                // }, 1000);
 
             })
             .catch(err => {
@@ -88,7 +91,7 @@ const Register = () => {
                 <div className="text-center lg:text-left">
                     <h1 className="text-5xl font-bold">Regiter Now</h1>
                     <p className="py-6">
-                       New here! Welcome. You are on right track..
+                        New here! Welcome. You are on right track..
                     </p>
                 </div>
                 <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">

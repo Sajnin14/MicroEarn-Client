@@ -65,9 +65,6 @@ const AddTask = () => {
             buyerName: userInfo.name,
             buyerEmail: userInfo.email,
         }
-
-
-         
         
         axiosSecure.post('/tasks', tasksInfo)
             .then(res => {

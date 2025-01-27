@@ -11,17 +11,17 @@ const TaskDetails = () => {
     const axiosSecure = useAxiosSecure();
     const navigate = useNavigate();
 
-    const handleSubmit =async(e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const submit = e.target.submit.value;
-        
+
         const submitInfo = {
             submissionInfo: submit,
-            task_id : loader._id,
-            task_title : loader.title,
+            task_id: loader._id,
+            task_title: loader.title,
             payable_amount: loader.payCoin,
-            neededWorkers : loader.neededWorkers,
-            totalSpentCoin : loader.totalSpentCoin,
+            neededWorkers: loader.neededWorkers,
+            totalSpentCoin: loader.totalSpentCoin,
             worker_email: userInfo.email,
             worker_name: userInfo.name,
             Buyer_name: loader.buyerName,
@@ -40,22 +40,24 @@ const TaskDetails = () => {
         }
 
 
-        const res = await axiosSecure.post('/submitTask', submitInfo)
-        if(res.data.insertedCount){
-            Swal.fire({
-                title: "Task Submission completed!",
-                icon: "success",
-                timer: 1500
-              });
+        await axiosSecure.post('/submitTask', submitInfo)
+            .then(res => {
+                axiosSecure.post('/notifications', notificationInfo)
+                    .then(() => {
+                    })
+                if (res.data.insertedId) {
+                    Swal.fire({
+                        title: "Task Submission completed!",
+                        icon: "success",
+                        timer: 1500
+                    });
+                }
 
-            axiosSecure.post('/notifications', notificationInfo)
-            .then(() => {
-               
+                navigate('/dashboard/workerSubmissions')
+
             })
 
-            navigate('/dashboard/workerSubmissions')
-        }
-        
+
     }
     return (
         <div>

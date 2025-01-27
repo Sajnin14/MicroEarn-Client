@@ -55,15 +55,14 @@ const BuyerHome = () => {
         }
 
 
-        const updatedNeeded = data.status === "approved" ? workersCount - 1 : workersCount + 1;
-        const total = updatedNeeded * payable_amount;
+        const updatedNeeded = data.status === "approved" ? ''  : workersCount + 1;
+        // const total = totalPayment + payable_amount;
         const updateInfo = {
             neededWorkers: updatedNeeded,
-            totalSpentCoin: total,
         };
 
 
-        const message = data.status === 'approved' ? `you have earned ${payable_amount} from ${userInfo.name} for completing $"{title}"` : `${userInfo.name} rejects your task ${title}`
+        const message = data.status === 'approved' ? `you have earned ${payable_amount} from ${userInfo.name} for completing ${title}` : `${userInfo.name} rejects your task ${title}`
 
         const notificationInfo = {
             status: data.status,
@@ -79,6 +78,10 @@ const BuyerHome = () => {
             axiosSecure.patch(`/submitTask/${id}`, data)
                 .then(async (res) => {
 
+                    axiosSecure.post('/notifications', notificationInfo)
+                    .then(() => { })
+
+
                     if (res.data.modifiedCount) {
 
                         refetch();
@@ -89,10 +92,7 @@ const BuyerHome = () => {
                         }
 
 
-                        axiosSecure.post('/notifications', notificationInfo)
-                            .then(() => { })
-
-
+                       
                     }
 
                     if (res.data.modifiedCount && data.status === 'approved') {

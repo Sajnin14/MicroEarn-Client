@@ -82,9 +82,7 @@ const Navbar = () => {
 
                         </div> : <div><IoPersonCircleOutline className="text-4xl"></IoPersonCircleOutline></div>
                     }
-                    <a className="btn bg-[#007BFF] text-base text-white hidden md:block" href="https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-Sajnin14" target="blank">Join As Developer</a>
-
-                    <a className="p-1 rounded-md md:hidden bg-[#007BFF] text-xs text-white" href="https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-Sajnin14" target="blank">As Dev</a>
+                    <a className="p-1 text-xs rounded-md md:p-3 bg-[#007BFF] md:text-base text-white" href="https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-Sajnin14" target="blank">Join As Developer</a>
 
                 </div>
             </div>
