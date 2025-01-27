@@ -1,4 +1,5 @@
 
+import { Helmet } from "react-helmet";
 import AboutUs from "../AboutUs/AboutUs";
 import Banner from "../Banner/Banner";
 import BestTasks from "../BestTasks/BestTasks";
@@ -9,6 +10,9 @@ import Testimonial from "../Testimonial/Testimonial";
 const Home = () => {
     return (
         <div className="space-y-14">
+            <Helmet>
+                <title>MicroEarn | Home</title>
+            </Helmet>
            <Banner></Banner>
            <BestWorkers></BestWorkers>
            <Testimonial></Testimonial>

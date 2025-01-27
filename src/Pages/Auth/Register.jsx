@@ -3,6 +3,7 @@ import useAuth from "../../hooks/useAuth";
 import { Link, useNavigate } from "react-router-dom";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { imageUploade } from "../../hooks/imageUploade";
+import { Helmet } from "react-helmet";
 
 
 const Register = () => {
@@ -80,6 +81,9 @@ const Register = () => {
 
     return (
         <div className="hero bg-base-100 min-h-screen">
+            <Helmet>
+                <title>MicroEarn | Register</title>
+            </Helmet>
             <div className="hero-content flex-col lg:flex-row-reverse py-5">
                 <div className="text-center lg:text-left">
                     <h1 className="text-5xl font-bold">Regiter Now</h1>
