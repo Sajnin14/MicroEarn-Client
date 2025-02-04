@@ -1,5 +1,7 @@
 Website Name : MicroEarn
-Website Category: 19
+
+Micro Earn is a platform designed for earning through microtasks, rewards, or small-scale jobs. It allows users to complete tasks, earn points or money, and manage their earnings efficiently.
+
 Website Live Link: https://microearn-dbc85.web.app/
 ===========================================================
 Admin email: sajnin@sajnin.com
