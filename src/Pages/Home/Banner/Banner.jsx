@@ -8,12 +8,12 @@ import img4 from '../../../assets/images/image4.jpg'
 
 const Banner = () => {
     return (
-        
             <Carousel className="min-h-screen">
                 <div>
                     <img src={img1} className="h-[400px] w-full object-cover"/>
                     <p className="legend">Simplifying Micro Tasks for Maximum Rewards.</p>
                 </div>
+
                 <div>
                     <img src={img2} className="h-[400px] w-full object-cover"/>
                     <p className="legend">Small Tasks, Big Earnings!</p>
@@ -22,6 +22,7 @@ const Banner = () => {
                     <img src={img3} className="h-[400px] w-full object-cover"/>
                     <p className="legend">Your Trusted Platform for Earning Made Easy.</p>
                 </div>
+                
                 <div>
                     <img src={img4} className="h-[400px] w-full object-cover"/>
                     <p className="legend">Unlock Earnings with Every Click.</p>

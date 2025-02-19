@@ -18,7 +18,7 @@ const BestWorkers = () => {
     const topWorkers = totalWorkers.sort((a, b) => b.coin - a.coin).slice(0, 6);
 
     return (
-        <div>
+        <div id="bestWorkers">
             <SectionTitle heading='Best Workers' subHeading='Honoring Our Best MicroEarn Achievers!'></SectionTitle>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5 w-11/12 mx-auto">

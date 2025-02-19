@@ -18,7 +18,7 @@ const Testimonial = () => {
         })
     },[])
     return (
-        <div>
+        <div id="testimonial">
             <SectionTitle heading='Testimonial' subHeading='Feedback That Inspires Us'></SectionTitle>
 
             <Swiper navigation={true} modules={[Navigation]} className="mySwiper w-11/12 mx-auto text-center my-20">

@@ -10,6 +10,9 @@ const Navbar = () => {
 
     const links = <div className="space-x-3 mr-2 font-semibold">
         <NavLink to='/'>Home</NavLink>
+        <a href="#bestWorkers">Best Workers</a>
+        <a href="#testimonial">Testimonial</a>
+        <a href="#bestTasks">Best Tasks</a>
         {
             user?.email && <>
                 <NavLink to='/dashboard'>Dashboard</NavLink>
