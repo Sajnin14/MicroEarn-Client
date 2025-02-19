@@ -13,10 +13,11 @@ const Navbar = () => {
         <a href="#bestWorkers">Best Workers</a>
         <a href="#testimonial">Testimonial</a>
         <a href="#bestTasks">Best Tasks</a>
+        <a href="#aboutUs">About Us</a>
+        <NavLink to='/blogs'>Blogs</NavLink>
         {
             user?.email && <>
                 <NavLink to='/dashboard'>Dashboard</NavLink>
-                <Link className="font-bold underline">Coin : {userInfo.coin}</Link>
             </>
         }
  
@@ -75,7 +76,10 @@ const Navbar = () => {
                 </div>
                 <div className="navbar-end">
                     {
-                        user && user?.email ? <div className="relative flex flex-col items-center group mr-2">
+                        user && user?.email ? 
+                        <>
+                         <Link className="font-bold underline mr-2">Coin : {userInfo.coin}</Link>
+                         <div className="relative flex flex-col items-center group mr-2">
                             <Link>
                                 <img src={user.photoURL} className="w-10 h-10 rounded-full border-2 border-green-600" />
                                 <p className="absolute w-2 h-2 bg-green-500 rounded-full top-0 right-2"></p>
@@ -83,7 +87,9 @@ const Navbar = () => {
                                 <p className="absolute hidden group-hover:block top-9 right-1 font-semibold">{user.displayName}</p>
                             </Link>
 
-                        </div> : <div><IoPersonCircleOutline className="text-4xl"></IoPersonCircleOutline></div>
+                        </div>
+                        </>
+                         : <div><IoPersonCircleOutline className="text-4xl"></IoPersonCircleOutline></div>
                     }
                     <a className="p-1 text-xs rounded-md md:p-3 bg-[#007BFF] md:text-base text-white" href="https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-Sajnin14" target="blank">Join As Developer</a>
 

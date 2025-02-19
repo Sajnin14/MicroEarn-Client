@@ -27,7 +27,7 @@ const BestWorkers = () => {
                         <figure className="px-10 pt-10">
                           <img
                             src={top.photo}
-                            className="rounded-xl h-64" />
+                            className="rounded-xl w-full object-cover h-64" />
                         </figure>
                         <div className="card-body items-center text-center">
                           <h2 className="card-title">{top.name}</h2>
