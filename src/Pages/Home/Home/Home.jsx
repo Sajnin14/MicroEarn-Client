@@ -6,6 +6,7 @@ import BestTasks from "../BestTasks/BestTasks";
 import BestWorkers from "../BestWorkers/BestWorkers";
 import ContactUs from "../ContactUs/ContactUs";
 import Testimonial from "../Testimonial/Testimonial";
+import BlogSection from "../BlogsSection/BlogSection";
 
 const Home = () => {
     return (
@@ -17,6 +18,7 @@ const Home = () => {
            <BestWorkers></BestWorkers>
            <Testimonial></Testimonial>
            <BestTasks></BestTasks>
+           <BlogSection></BlogSection>
            <AboutUs></AboutUs>
            <ContactUs></ContactUs>
         </div> 
