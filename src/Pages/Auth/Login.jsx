@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet";
+import loginIng from '../../assets/images/2780702.jpg'
 
 
 const Login = () => {
@@ -49,13 +50,8 @@ const Login = () => {
                 <title>MicroEarn | Login</title>
             </Helmet>
             <div className="hero-content flex-col lg:flex-row-reverse">
-                <div className="text-center lg:text-left">
-                    <h1 className="text-5xl font-bold">Login Now</h1>
-                    <p className="py-6">
-                        Login and earn money with fun
-                    </p>
-                </div>
-                <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+                
+                <div className="card bg-base-100 w-full max-w-lg shrink-0 shadow-2xl">
                     <form onSubmit={handleLogin} className="card-body">
 
                         <div className="form-control">
@@ -88,7 +84,15 @@ const Login = () => {
 
                     </form>
 
-                    <button onClick={handleGoogle} className="btn bg-base-300 mt-12 mx-5"><FcGoogle className="text-xl"></FcGoogle> Sign-in With Google</button>
+                    <button onClick={handleGoogle} className="btn bg-base-300 mx-5 mb-7"><FcGoogle className="text-xl"></FcGoogle> Sign-in With Google</button>
+                </div>
+
+                <div>
+                    {/* <h1 className="text-5xl font-bold">Login Now</h1>
+                    <p className="py-6">
+                        Login and earn money with fun
+                    </p> */}
+                    <img src={loginIng} className="w-2/3 mx-auto rounded-lg" />
                 </div>
             </div>
         </div>

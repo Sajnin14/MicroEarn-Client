@@ -5,8 +5,8 @@ const Blogs = () => {
         <div>
             <SectionTitle heading='Blogs' subHeading='Unlock More Earnings: Tips, Tricks & Success Stories!'></SectionTitle>
 
-            <div className="w-11/12 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-10">
-                <div>
+            <div className="w-11/12 mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 my-10">
+                <div className="shadow-lg p-3">
                     <h3 className="text-2xl font-bold">#4 Proven Ways to Maximize Your Earnings on Micro Earn</h3>
                     <p>Earning money online can be easy if you use the right strategies. Micro Earn provides various opportunities to generate income, but maximizing your earnings requires smart tactics. Here are ten proven ways to increase your income on Micro Earn.</p>
                     <h4 className="font-bold my-2">1. Complete High-Paying Tasks First: </h4>
@@ -22,7 +22,7 @@ const Blogs = () => {
                 </div>
 
 
-                <div>
+                <div className="shadow-lg p-3">
                     <h3 className="text-2xl font-bold">#Step-by-Step Guide: How to Complete Your First Task on Micro Earn</h3>
                     <p>Getting started on Micro Earn is easy, and completing your first task is the first step toward earning online. Follow this step-by-step guide to ensure a smooth experience and maximize your earnings.</p>
                     <h4 className="font-bold my-2">Step 1: Sign Up and Log In: </h4>
@@ -51,7 +51,7 @@ const Blogs = () => {
                     <p>Once approved, your earnings will be credited to your Micro Earn wallet. <br />Accumulate earnings and withdraw them using available payment methods (PayPal, crypto, bank transfer, etc.).</p>
                 </div>
 
-                <div>
+                <div className="shadow-lg p-3">
                     <h3 className="text-2xl font-bold">#Latest Trends in Online Earning for 2025</h3>
                     <p>The online earning landscape is constantly evolving, and 2025 brings new trends and opportunities for individuals looking to generate income digitally. Here are the latest trends shaping online earning this year:</p>
                     <h4 className="font-bold my-2">1. Rise of AI-Powered Gig Work: </h4>
